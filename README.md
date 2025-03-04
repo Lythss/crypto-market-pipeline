@@ -52,9 +52,11 @@ A Big Data pipeline for cryptocurrency market analysis using the [CoinGecko API]
 - Apache HBase (2.x or later)
 - Apache Airflow (2.x or later)
 - HappyBase library (for HBase in Python):
+
 ```bash
 pip install happybase
 ```
+
 - Requests library (for CoinGecko API):
 ```bash
 pip install requests
