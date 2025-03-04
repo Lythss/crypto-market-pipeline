@@ -1,13 +1,11 @@
-*.tar
-*.tar.*
-*.jar
-*.exe
-*.msi
-*.zip
-*.tgz
-*.log
-*.log.*
-*.sig
+# Python cache files
+__pycache__/
+*.pyc
 
-pkg/
-src/
+# Airflow metadata and logs
+airflow.db
+airflow-webserver.pid
+logs/
+
+# Temporary files
+/tmp/
