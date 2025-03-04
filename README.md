@@ -43,7 +43,7 @@ A Big Data pipeline for cryptocurrency market analysis using the [CoinGecko API]
          └──────────────┬───────────────┘
                         │
                      Analytics / BI
-
+```
 # Crypto Market Pipeline
 
 ## 📋 Prerequisites
