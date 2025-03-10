@@ -78,19 +78,6 @@ This infrastructure is scalable and modular, capable of supporting complex analy
   Automatic task retries and dependency management ensure robust pipeline execution 🔄.
 
 ---
-
-## 🏗️ Architecture & Design of the Hadoop Data Lake
-
-```mermaid
-graph TD;
-    A[CoinGecko API 📡] --> B[DAG for Ingestion (Airflow) ⏱️];
-    B --> C[Raw Zone in HDFS 🗄️];
-    C --> D[DAG for Processing (Airflow + MapReduce) 🔄];
-    D --> E[Processed Zone in HDFS 📑];
-    E --> F[HBase for Fast Queries 🔍];
-    F --> G[Analytics/BI Dashboard 📊];
-```
-
 ## Architecture Overview
 
 - **CoinGecko API:**  
