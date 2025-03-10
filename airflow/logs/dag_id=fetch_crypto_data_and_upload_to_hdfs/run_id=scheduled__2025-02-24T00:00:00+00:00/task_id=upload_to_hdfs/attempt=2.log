@@ -1,0 +1,22 @@
+[2025-02-25T09:10:08.580+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T09:10:08.590+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T09:10:08.591+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-25T09:10:08.606+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): upload_to_hdfs> on 2025-02-24 00:00:00+00:00
+[2025-02-25T09:10:08.614+0000] {standard_task_runner.py:57} INFO - Started process 88636 to run task
+[2025-02-25T09:10:08.619+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'scheduled__2025-02-24T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmp9tqgiap0']
+[2025-02-25T09:10:08.623+0000] {standard_task_runner.py:85} INFO - Job 15: Subtask upload_to_hdfs
+[2025-02-25T09:10:08.685+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-24T00:00:00+00:00 [running]> on host a57837beda44
+[2025-02-25T09:10:08.776+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-24T00:00:00+00:00'
+[2025-02-25T09:10:13.267+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 315, in upload_to_hdfs
+    result = subprocess.run(cmd, shell=True, capture_output=True, text=True)
+NameError: name 'subprocess' is not defined
+[2025-02-25T09:10:13.285+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250224T000000, start_date=20250225T091008, end_date=20250225T091013
+[2025-02-25T09:10:13.311+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 15 for task upload_to_hdfs (name 'subprocess' is not defined; 88636)
+[2025-02-25T09:10:13.346+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-25T09:10:13.372+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

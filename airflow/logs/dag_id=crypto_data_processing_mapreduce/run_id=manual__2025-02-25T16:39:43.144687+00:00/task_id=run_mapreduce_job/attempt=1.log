@@ -1,0 +1,26 @@
+[2025-02-25T16:39:45.808+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-25T16:39:43.144687+00:00 [queued]>
+[2025-02-25T16:39:45.821+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-25T16:39:43.144687+00:00 [queued]>
+[2025-02-25T16:39:45.822+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-25T16:39:45.845+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-25 16:39:43.144687+00:00
+[2025-02-25T16:39:45.852+0000] {standard_task_runner.py:57} INFO - Started process 71410 to run task
+[2025-02-25T16:39:45.857+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'crypto_data_processing_mapreduce', 'run_mapreduce_job', 'manual__2025-02-25T16:39:43.144687+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/transform_data.py', '--cfg-path', '/tmp/tmpca_t9mf_']
+[2025-02-25T16:39:45.860+0000] {standard_task_runner.py:85} INFO - Job 10: Subtask run_mapreduce_job
+[2025-02-25T16:39:45.921+0000] {task_command.py:415} INFO - Running <TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-25T16:39:43.144687+00:00 [running]> on host 53d736af5afa
+[2025-02-25T16:39:45.984+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.9/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-25T16:39:46.032+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_data_processing_mapreduce' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T16:39:43.144687+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-25T16:39:43.144687+00:00'
+[2025-02-25T16:39:46.034+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-25T16:39:46.037+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n            echo $PATH\n            which docker\n            docker exec namenode hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar             -input /user/root/crypto/YYYY=2025/MM=02/DD=25/crypto_historical_data.csv             -output /user/root/crypto/processed/YYYY=2025/MM=02/DD=25             -mapper /home/mapper.py             -reducer /home/reducer.py             -file /home/mapper.py             -file /home/reducer.py\n        ']
+[2025-02-25T16:39:46.049+0000] {subprocess.py:86} INFO - Output:
+[2025-02-25T16:39:46.050+0000] {subprocess.py:93} INFO - $PATH:/opt/hadoop/bin
+[2025-02-25T16:39:46.050+0000] {subprocess.py:93} INFO - /bin/bash: line 3: which: command not found
+[2025-02-25T16:39:46.052+0000] {subprocess.py:93} INFO - /bin/bash: line 4: docker: command not found
+[2025-02-25T16:39:46.053+0000] {subprocess.py:97} INFO - Command exited with return code 127
+[2025-02-25T16:39:46.069+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 127.
+[2025-02-25T16:39:46.076+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=crypto_data_processing_mapreduce, task_id=run_mapreduce_job, execution_date=20250225T163943, start_date=20250225T163945, end_date=20250225T163946
+[2025-02-25T16:39:46.091+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 10 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 127.; 71410)
+[2025-02-25T16:39:46.109+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-25T16:39:46.131+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

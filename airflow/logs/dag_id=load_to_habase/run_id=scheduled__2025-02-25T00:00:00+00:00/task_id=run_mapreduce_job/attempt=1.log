@@ -1,0 +1,54 @@
+[2025-02-26T19:53:39.901+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_to_habase.run_mapreduce_job scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T19:53:39.921+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_to_habase.run_mapreduce_job scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T19:53:39.922+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T19:53:39.956+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-25 00:00:00+00:00
+[2025-02-26T19:53:39.968+0000] {standard_task_runner.py:57} INFO - Started process 12714 to run task
+[2025-02-26T19:53:39.983+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_to_habase', 'run_mapreduce_job', 'scheduled__2025-02-25T00:00:00+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmpjeltpfjg']
+[2025-02-26T19:53:39.995+0000] {standard_task_runner.py:85} INFO - Job 22: Subtask run_mapreduce_job
+[2025-02-26T19:53:40.194+0000] {task_command.py:415} INFO - Running <TaskInstance: load_to_habase.run_mapreduce_job scheduled__2025-02-25T00:00:00+00:00 [running]> on host 8d9ab8d4ded3
+[2025-02-26T19:53:40.351+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.9/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-26T19:53:40.527+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_to_habase' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-25T00:00:00+00:00'
+[2025-02-26T19:53:40.570+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T19:53:40.626+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n            docker exec namenode bash -c "cd /home &&             hadoop fs -rm -r /user/root/crypto/processed/YYYY=2025/MM=02/DD=25 || true &&             hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar             -input /user/root/crypto/YYYY=2025/MM=02/DD=25/crypto_historical_data.csv             -output /user/root/crypto/processed/YYYY=2025/MM=02/DD=25             -mapper \'/usr/bin/python3 /home/mapper.py\'             -reducer \'/usr/bin/python3 /home/reducer.py\'             -file /home/mapper.py             -file /home/reducer.py"\n        ']
+[2025-02-26T19:53:40.699+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T19:53:45.774+0000] {subprocess.py:93} INFO - rm: `/user/root/crypto/processed/YYYY=2025/MM=02/DD=25': No such file or directory
+[2025-02-26T19:53:47.602+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:47,599 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+[2025-02-26T19:53:49.289+0000] {subprocess.py:93} INFO - packageJobJar: [/home/mapper.py, /home/reducer.py] [] /tmp/streamjob8475515293350016988.jar tmpDir=null
+[2025-02-26T19:53:49.507+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:49,505 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-26T19:53:49.300+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:49,299 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-26T19:53:49.302+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:49,299 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-26T19:53:49.353+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:49,351 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-26T19:53:49.400+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:49,391 INFO mapred.FileInputFormat: Total input files to process : 1
+[2025-02-26T19:53:49.481+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:49,479 INFO mapreduce.JobSubmitter: number of splits:1
+[2025-02-26T19:53:49.729+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:49,725 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local951788566_0001
+[2025-02-26T19:53:49.733+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:49,727 INFO mapreduce.JobSubmitter: Executing with tokens: []
+[2025-02-26T19:53:50.465+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:50,463 INFO mapred.LocalDistributedCacheManager: Localized file:/home/mapper.py as file:/tmp/hadoop-root/mapred/local/job_local951788566_0001_ba033e6f-775d-4178-8d6a-4ce77701f4cb/mapper.py
+[2025-02-26T19:53:50.474+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:50,472 WARN concurrent.ExecutorHelper: Execution exception when running task in LocalDistributedCacheManager Downloader #0
+[2025-02-26T19:53:50.483+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:50,473 WARN concurrent.ExecutorHelper: Caught exception in thread LocalDistributedCacheManager Downloader #0:
+[2025-02-26T19:53:50.486+0000] {subprocess.py:93} INFO - java.io.IOException: Resource file:/home/reducer.py changed on src filesystem (expected 1740599628000, was 1740599630000
+[2025-02-26T19:53:50.487+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.yarn.util.FSDownload.verifyAndCopy(FSDownload.java:273)
+[2025-02-26T19:53:50.488+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.yarn.util.FSDownload.access$000(FSDownload.java:67)
+[2025-02-26T19:53:50.488+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.yarn.util.FSDownload$2.run(FSDownload.java:414)
+[2025-02-26T19:53:50.489+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.yarn.util.FSDownload$2.run(FSDownload.java:411)
+[2025-02-26T19:53:50.490+0000] {subprocess.py:93} INFO - 	at java.security.AccessController.doPrivileged(Native Method)
+[2025-02-26T19:53:50.491+0000] {subprocess.py:93} INFO - 	at javax.security.auth.Subject.doAs(Subject.java:422)
+[2025-02-26T19:53:50.492+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.security.UserGroupInformation.doAs(UserGroupInformation.java:1730)
+[2025-02-26T19:53:50.492+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.yarn.util.FSDownload.call(FSDownload.java:411)
+[2025-02-26T19:53:50.493+0000] {subprocess.py:93} INFO - 	at org.apache.hadoop.yarn.util.FSDownload.call(FSDownload.java:66)
+[2025-02-26T19:53:50.493+0000] {subprocess.py:93} INFO - 	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+[2025-02-26T19:53:50.494+0000] {subprocess.py:93} INFO - 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+[2025-02-26T19:53:50.494+0000] {subprocess.py:93} INFO - 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+[2025-02-26T19:53:50.495+0000] {subprocess.py:93} INFO - 	at java.lang.Thread.run(Thread.java:748)
+[2025-02-26T19:53:50.495+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:50,485 INFO mapreduce.JobSubmitter: Cleaning up the staging area file:/tmp/hadoop/mapred/staging/root951788566/.staging/job_local951788566_0001
+[2025-02-26T19:53:50.496+0000] {subprocess.py:93} INFO - 2025-02-26 19:53:50,488 ERROR streaming.StreamJob: Error Launching job : java.util.concurrent.ExecutionException: java.io.IOException: Resource file:/home/reducer.py changed on src filesystem (expected 1740599628000, was 1740599630000
+[2025-02-26T19:53:50.496+0000] {subprocess.py:93} INFO - Streaming Command Failed!
+[2025-02-26T19:53:51.029+0000] {subprocess.py:97} INFO - Command exited with return code 5
+[2025-02-26T19:53:51.063+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 5.
+[2025-02-26T19:53:51.070+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=load_to_habase, task_id=run_mapreduce_job, execution_date=20250225T000000, start_date=20250226T195339, end_date=20250226T195351
+[2025-02-26T19:53:51.089+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 22 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 5.; 12714)
+[2025-02-26T19:53:51.114+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T19:53:51.140+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

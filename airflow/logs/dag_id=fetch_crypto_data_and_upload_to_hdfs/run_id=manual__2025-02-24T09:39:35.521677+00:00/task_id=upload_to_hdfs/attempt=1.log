@@ -1,0 +1,75 @@
+[2025-02-24T09:39:50.652+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-24T09:39:35.521677+00:00 [queued]>
+[2025-02-24T09:39:50.663+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-24T09:39:35.521677+00:00 [queued]>
+[2025-02-24T09:39:50.664+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-24T09:39:50.684+0000] {taskinstance.py:1382} INFO - Executing <Task(DockerOperator): upload_to_hdfs> on 2025-02-24 09:39:35.521677+00:00
+[2025-02-24T09:39:50.694+0000] {standard_task_runner.py:57} INFO - Started process 20250 to run task
+[2025-02-24T09:39:50.698+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'manual__2025-02-24T09:39:35.521677+00:00', '--job-id', '5', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpe2borb3d']
+[2025-02-24T09:39:50.702+0000] {standard_task_runner.py:85} INFO - Job 5: Subtask upload_to_hdfs
+[2025-02-24T09:39:50.776+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-24T09:39:35.521677+00:00 [running]> on host 781ad978c51a
+[2025-02-24T09:39:50.875+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T09:39:35.521677+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-24T09:39:35.521677+00:00'
+[2025-02-24T09:39:50.915+0000] {docker.py:460} INFO - Pulling docker image apache/***:2.7.0-python3.9
+[2025-02-24T09:39:54.211+0000] {docker.py:474} INFO - 2.7.0-python3.9: Pulling from apache/***
+[2025-02-24T09:39:54.259+0000] {docker.py:469} INFO - Digest: sha256:927139b7cffe8eb719f0b7c8cc3dbd62651a1504f7a87509869af9eb8732631d
+[2025-02-24T09:39:54.261+0000] {docker.py:469} INFO - Status: Image is up to date for apache/***:2.7.0-python3.9
+[2025-02-24T09:39:54.268+0000] {docker.py:333} INFO - Starting docker container from image apache/***:2.7.0-python3.9
+[2025-02-24T09:39:54.291+0000] {docker.py:341} WARNING - Using remote engine or docker-in-docker and mounting temporary volume from host is not supported. Falling back to `mount_tmp_dir=False` mode. You can set `mount_tmp_dir` parameter to False to disable mounting and remove the warning
+[2025-02-24T09:39:54.317+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 268, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.9/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: http+docker://localhost/v1.47/containers/create?name=namenode
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 338, in _run_image
+    return self._run_image_with_mounts(self.mounts + [tmp_mount], add_tmp_variable=True)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 365, in _run_image_with_mounts
+    self.container = self.cli.create_container(
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/container.py", line 431, in create_container
+    return self.create_container_from_config(config, name, platform)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/container.py", line 448, in create_container_from_config
+    return self._result(res, True)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 274, in _result
+    self._raise_for_status(response)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 270, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 400 Client Error for http+docker://localhost/v1.47/containers/create?name=namenode: Bad Request ("invalid mount config for type "bind": bind source path does not exist: /tmp/airflowtmprnmanxfu")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 268, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.9/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 409 Client Error: Conflict for url: http+docker://localhost/v1.47/containers/create?name=namenode
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 476, in execute
+    return self._run_image()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 347, in _run_image
+    return self._run_image_with_mounts(self.mounts, add_tmp_variable=False)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 365, in _run_image_with_mounts
+    self.container = self.cli.create_container(
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/container.py", line 431, in create_container
+    return self.create_container_from_config(config, name, platform)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/container.py", line 448, in create_container_from_config
+    return self._result(res, True)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 274, in _result
+    self._raise_for_status(response)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 270, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 409 Client Error for http+docker://localhost/v1.47/containers/create?name=namenode: Conflict ("Conflict. The container name "/namenode" is already in use by container "0f1931b12c1516b541dea3916ae80085c3e288366b60304f2d69236e273c8d59". You have to remove (or rename) that container to be able to reuse that name.")
+[2025-02-24T09:39:54.330+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250224T093935, start_date=20250224T093950, end_date=20250224T093954
+[2025-02-24T09:39:54.356+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 5 for task upload_to_hdfs (409 Client Error for http+docker://localhost/v1.47/containers/create?name=namenode: Conflict ("Conflict. The container name "/namenode" is already in use by container "0f1931b12c1516b541dea3916ae80085c3e288366b60304f2d69236e273c8d59". You have to remove (or rename) that container to be able to reuse that name."); 20250)
+[2025-02-24T09:39:54.402+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-24T09:39:54.440+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

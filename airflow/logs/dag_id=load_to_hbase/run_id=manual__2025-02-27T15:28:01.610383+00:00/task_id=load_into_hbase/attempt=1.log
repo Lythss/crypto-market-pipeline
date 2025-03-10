@@ -1,0 +1,32 @@
+[2025-02-27T15:28:03.869+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T15:28:01.610383+00:00 [queued]>
+[2025-02-27T15:28:03.882+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T15:28:01.610383+00:00 [queued]>
+[2025-02-27T15:28:03.884+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-27T15:28:03.911+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_into_hbase> on 2025-02-27 15:28:01.610383+00:00
+[2025-02-27T15:28:03.924+0000] {standard_task_runner.py:57} INFO - Started process 3834 to run task
+[2025-02-27T15:28:03.940+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_to_hbase', 'load_into_hbase', 'manual__2025-02-27T15:28:01.610383+00:00', '--job-id', '17', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmpkvr9q37s']
+[2025-02-27T15:28:03.950+0000] {standard_task_runner.py:85} INFO - Job 17: Subtask load_into_hbase
+[2025-02-27T15:28:04.051+0000] {task_command.py:415} INFO - Running <TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T15:28:01.610383+00:00 [running]> on host b0117377cc2b
+[2025-02-27T15:28:04.154+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_to_hbase' AIRFLOW_CTX_TASK_ID='load_into_hbase' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T15:28:01.610383+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T15:28:01.610383+00:00'
+[2025-02-27T15:28:04.958+0000] {logging_mixin.py:151} INFO - Creating table 'crypto_prices'
+[2025-02-27T15:28:04.973+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/load_data.py", line 50, in load_processed_data
+    connection.create_table(
+  File "/home/airflow/.local/lib/python3.9/site-packages/happybase/connection.py", line 307, in create_table
+    column_descriptors.append(ColumnDescriptor(**kwargs))
+TypeError: __init__() got an unexpected keyword argument 'blockcache'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/load_data.py", line 80, in load_processed_data
+    raise AirflowException(f"Failed to load data into HBase: {str(e)}")
+airflow.exceptions.AirflowException: Failed to load data into HBase: __init__() got an unexpected keyword argument 'blockcache'
+[2025-02-27T15:28:04.985+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=load_to_hbase, task_id=load_into_hbase, execution_date=20250227T152801, start_date=20250227T152803, end_date=20250227T152804
+[2025-02-27T15:28:05.005+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 17 for task load_into_hbase (Failed to load data into HBase: __init__() got an unexpected keyword argument 'blockcache'; 3834)
+[2025-02-27T15:28:05.034+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-27T15:28:05.063+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

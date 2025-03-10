@@ -1,0 +1,58 @@
+[2025-02-27T00:28:33.206+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-26T00:00:00+00:00 [queued]>
+[2025-02-27T00:28:33.225+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-26T00:00:00+00:00 [queued]>
+[2025-02-27T00:28:33.225+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-27T00:28:33.240+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-26 00:00:00+00:00
+[2025-02-27T00:28:33.247+0000] {standard_task_runner.py:57} INFO - Started process 95254 to run task
+[2025-02-27T00:28:33.251+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'crypto_data_processing_mapreduce', 'run_mapreduce_job', 'scheduled__2025-02-26T00:00:00+00:00', '--job-id', '40', '--raw', '--subdir', 'DAGS_FOLDER/transform_data.py', '--cfg-path', '/tmp/tmpcht97150']
+[2025-02-27T00:28:33.255+0000] {standard_task_runner.py:85} INFO - Job 40: Subtask run_mapreduce_job
+[2025-02-27T00:28:33.353+0000] {task_command.py:415} INFO - Running <TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-26T00:00:00+00:00 [running]> on host 8d9ab8d4ded3
+[2025-02-27T00:28:33.431+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.9/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-27T00:28:33.481+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_data_processing_mapreduce' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-26T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-26T00:00:00+00:00'
+[2025-02-27T00:28:33.484+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-27T00:28:33.487+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n                docker exec namenode bash -c "cd /home &&                 hadoop fs -rm -r /user/root/crypto/processed/YYYY=2025/MM=02/DD=26 || true &&                 hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar                 -input /user/root/crypto/YYYY=2025/MM=02/DD=26/crypto_historical_data.csv                 -output /user/root/crypto/processed/YYYY=2025/MM=02/DD=26                 -mapper \'/usr/bin/python3 /home/mapper.py\'                 -reducer \'/usr/bin/python3 /home/reducer.py\'                 -file /home/mapper.py                 -file /home/reducer.py"\n            ']
+[2025-02-27T00:28:33.501+0000] {subprocess.py:86} INFO - Output:
+[2025-02-27T00:28:35.679+0000] {subprocess.py:93} INFO - Deleted /user/root/crypto/processed/YYYY=2025/MM=02/DD=26
+[2025-02-27T09:05:45.898+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:45,849 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+[2025-02-27T09:05:51.128+0000] {subprocess.py:93} INFO - packageJobJar: [/home/mapper.py, /home/reducer.py] [] /tmp/streamjob1675616466333370550.jar tmpDir=null
+[2025-02-27T09:05:50.985+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:50,980 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-27T09:05:51.347+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:51,344 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-27T09:05:51.349+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:51,344 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-27T09:05:51.411+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:51,404 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-27T09:05:52.261+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:52,259 INFO mapred.FileInputFormat: Total input files to process : 1
+[2025-02-27T09:05:52.343+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:52,341 INFO mapreduce.JobSubmitter: number of splits:1
+[2025-02-27T09:05:52.535+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:52,532 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_local1153714909_0001
+[2025-02-27T09:05:52.536+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:52,533 INFO mapreduce.JobSubmitter: Executing with tokens: []
+[2025-02-27T09:05:52.824+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:52,822 INFO mapred.LocalDistributedCacheManager: Localized file:/home/mapper.py as file:/tmp/hadoop-root/mapred/local/job_local1153714909_0001_79c1f1c2-a902-4ea8-ad3d-0f86e3f9056b/mapper.py
+[2025-02-27T09:05:52.874+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:52,872 INFO mapred.LocalDistributedCacheManager: Localized file:/home/reducer.py as file:/tmp/hadoop-root/mapred/local/job_local1153714909_0001_a9a39c50-079e-4005-aef6-6849b4befabc/reducer.py
+[2025-02-27T09:05:53.014+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,007 INFO mapreduce.Job: The url to track the job: http://localhost:8080/
+[2025-02-27T09:05:53.015+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,011 INFO mapreduce.Job: Running job: job_local1153714909_0001
+[2025-02-27T09:05:53.018+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,015 INFO mapred.LocalJobRunner: OutputCommitter set in config null
+[2025-02-27T09:05:53.021+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,020 INFO mapred.LocalJobRunner: OutputCommitter is org.apache.hadoop.mapred.FileOutputCommitter
+[2025-02-27T09:05:53.029+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,027 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+[2025-02-27T09:05:53.030+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,027 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+[2025-02-27T09:05:53.102+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,100 INFO mapred.LocalJobRunner: Waiting for map tasks
+[2025-02-27T09:05:53.107+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,105 INFO mapred.LocalJobRunner: Starting task: attempt_local1153714909_0001_m_000000_0
+[2025-02-27T09:05:53.152+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,149 INFO output.FileOutputCommitter: File Output Committer Algorithm version is 2
+[2025-02-27T09:05:53.153+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,149 INFO output.FileOutputCommitter: FileOutputCommitter skip cleanup _temporary folders under output directory:false, ignore cleanup failures: false
+[2025-02-27T09:05:53.172+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,171 INFO mapred.Task:  Using ResourceCalculatorProcessTree : [ ]
+[2025-02-27T09:05:53.182+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,180 INFO mapred.MapTask: Processing split: hdfs://namenode:9000/user/root/crypto/YYYY=2025/MM=02/DD=26/crypto_historical_data.csv:0+44080
+[2025-02-27T09:05:53.210+0000] {subprocess.py:93} INFO - 2025-02-27 09:05:53,208 INFO mapred.MapTask: numReduceTasks: 1
+[2025-02-27T09:05:53.216+0000] {local_task_job_runner.py:294} WARNING - State of this instance has been externally set to up_for_retry. Terminating instance.
+[2025-02-27T09:05:53.225+0000] {process_utils.py:131} INFO - Sending 15 to group 95254. PIDs of all processes in the group: [95270, 95272, 95254]
+[2025-02-27T09:05:53.226+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 95254
+[2025-02-27T09:05:53.227+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2025-02-27T09:05:53.227+0000] {subprocess.py:104} INFO - Sending SIGTERM signal to process group
+[2025-02-27T09:05:53.234+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=95272, status='terminated', started='00:28:33') (95272) terminated with exit code None
+[2025-02-27T09:05:53.263+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 201, in execute
+    result = self.subprocess_hook.run_command(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/hooks/subprocess.py", line 91, in run_command
+    for raw_line in iter(self.sub_process.stdout.readline, b""):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1634, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2025-02-27T09:05:53.274+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=crypto_data_processing_mapreduce, task_id=run_mapreduce_job, execution_date=20250226T000000, start_date=20250227T002833, end_date=20250227T090553
+[2025-02-27T09:05:53.303+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 40 for task run_mapreduce_job (Task received SIGTERM signal; 95254)
+[2025-02-27T09:05:53.329+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=95270, status='terminated', started='00:28:33') (95270) terminated with exit code None
+[2025-02-27T09:05:53.330+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=95254, status='terminated', exitcode=1, started='00:28:32') (95254) terminated with exit code 1

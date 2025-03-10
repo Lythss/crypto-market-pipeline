@@ -1,0 +1,27 @@
+[2025-02-23T21:51:30.286+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data manual__2025-02-23T21:51:26.280791+00:00 [queued]>
+[2025-02-23T21:51:30.304+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data manual__2025-02-23T21:51:26.280791+00:00 [queued]>
+[2025-02-23T21:51:30.305+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-23T21:51:30.333+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_historical_data> on 2025-02-23 21:51:26.280791+00:00
+[2025-02-23T21:51:30.345+0000] {standard_task_runner.py:57} INFO - Started process 50773 to run task
+[2025-02-23T21:51:30.349+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'fetch_historical_data', 'manual__2025-02-23T21:51:26.280791+00:00', '--job-id', '46', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpn_ery073']
+[2025-02-23T21:51:30.353+0000] {standard_task_runner.py:85} INFO - Job 46: Subtask fetch_historical_data
+[2025-02-23T21:51:30.431+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data manual__2025-02-23T21:51:26.280791+00:00 [running]> on host 95f034191b67
+[2025-02-23T21:51:30.563+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='fetch_historical_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-23T21:51:26.280791+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-23T21:51:26.280791+00:00'
+[2025-02-23T21:51:30.594+0000] {history.py:247} ERROR - $BTC-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.602+0000] {history.py:247} ERROR - $ETH-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.613+0000] {history.py:247} ERROR - $LTC-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.622+0000] {history.py:247} ERROR - $XRP-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.630+0000] {history.py:247} ERROR - $ADA-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.646+0000] {history.py:247} ERROR - $DOT-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.670+0000] {history.py:247} ERROR - $BNB-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.683+0000] {history.py:247} ERROR - $SOL-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.703+0000] {history.py:247} ERROR - $LINK-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.712+0000] {history.py:247} ERROR - $UNI-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.720+0000] {history.py:247} ERROR - $XLM-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.733+0000] {history.py:247} ERROR - $DOGE-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.772+0000] {history.py:247} ERROR - $XMR-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.783+0000] {history.py:247} ERROR - $XTZ-USD: possibly delisted; no price data found  (period=30d)
+[2025-02-23T21:51:30.796+0000] {python.py:194} INFO - Done. Returned value was: /tmp/crypto_historical_data.csv
+[2025-02-23T21:51:30.830+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=fetch_historical_data, execution_date=20250223T215126, start_date=20250223T215130, end_date=20250223T215130
+[2025-02-23T21:51:30.884+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-23T21:51:30.921+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check

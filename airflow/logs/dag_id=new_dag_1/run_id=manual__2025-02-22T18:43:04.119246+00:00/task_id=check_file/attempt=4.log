@@ -1,0 +1,23 @@
+[2025-02-22T18:49:16.997+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: new_dag_1.check_file manual__2025-02-22T18:43:04.119246+00:00 [queued]>
+[2025-02-22T18:49:17.010+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: new_dag_1.check_file manual__2025-02-22T18:43:04.119246+00:00 [queued]>
+[2025-02-22T18:49:17.011+0000] {taskinstance.py:1359} INFO - Starting attempt 4 of 6
+[2025-02-22T18:49:17.028+0000] {taskinstance.py:1380} INFO - Executing <Task(BashOperator): check_file> on 2025-02-22 18:43:04.119246+00:00
+[2025-02-22T18:49:17.034+0000] {standard_task_runner.py:57} INFO - Started process 415 to run task
+[2025-02-22T18:49:17.040+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'new_dag_1', 'check_file', 'manual__2025-02-22T18:43:04.119246+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpued3rvpc']
+[2025-02-22T18:49:17.044+0000] {standard_task_runner.py:85} INFO - Job 16: Subtask check_file
+[2025-02-22T18:49:17.111+0000] {task_command.py:415} INFO - Running <TaskInstance: new_dag_1.check_file manual__2025-02-22T18:43:04.119246+00:00 [running]> on host 972836975d47
+[2025-02-22T18:49:17.202+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='new_dag_1' AIRFLOW_CTX_TASK_ID='check_file' AIRFLOW_CTX_EXECUTION_DATE='2025-02-22T18:43:04.119246+00:00' AIRFLOW_CTX_TRY_NUMBER='4' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-22T18:43:04.119246+00:00'
+[2025-02-22T18:49:17.205+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-22T18:49:17.206+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'ls -l /mnt/d/projets/***/input/persons.csv']
+[2025-02-22T18:49:17.219+0000] {subprocess.py:86} INFO - Output:
+[2025-02-22T18:49:17.222+0000] {subprocess.py:93} INFO - ls: cannot access '/mnt/d/projets/***/input/persons.csv': No such file or directory
+[2025-02-22T18:49:17.223+0000] {subprocess.py:97} INFO - Command exited with return code 2
+[2025-02-22T18:49:17.235+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 2.
+[2025-02-22T18:49:17.240+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=new_dag_1, task_id=check_file, execution_date=20250222T184304, start_date=20250222T184916, end_date=20250222T184917
+[2025-02-22T18:49:17.257+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 16 for task check_file (Bash command failed. The command returned a non-zero exit code 2.; 415)
+[2025-02-22T18:49:17.296+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-22T18:49:17.315+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

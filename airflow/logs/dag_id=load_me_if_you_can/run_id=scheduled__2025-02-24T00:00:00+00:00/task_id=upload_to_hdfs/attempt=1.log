@@ -1,0 +1,23 @@
+[2025-02-25T16:54:00.226+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_me_if_you_can.upload_to_hdfs scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T16:54:00.241+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_me_if_you_can.upload_to_hdfs scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T16:54:00.241+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-25T16:54:00.267+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): upload_to_hdfs> on 2025-02-24 00:00:00+00:00
+[2025-02-25T16:54:00.276+0000] {standard_task_runner.py:57} INFO - Started process 86361 to run task
+[2025-02-25T16:54:00.282+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_me_if_you_can', 'upload_to_hdfs', 'scheduled__2025-02-24T00:00:00+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmphld8ks2q']
+[2025-02-25T16:54:00.286+0000] {standard_task_runner.py:85} INFO - Job 15: Subtask upload_to_hdfs
+[2025-02-25T16:54:00.382+0000] {task_command.py:415} INFO - Running <TaskInstance: load_me_if_you_can.upload_to_hdfs scheduled__2025-02-24T00:00:00+00:00 [running]> on host 53d736af5afa
+[2025-02-25T16:54:00.790+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_me_if_you_can' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-24T00:00:00+00:00'
+[2025-02-25T16:54:00.794+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-25T16:54:00.799+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker exec hdfs dfs -ls /ls']
+[2025-02-25T16:54:00.824+0000] {subprocess.py:86} INFO - Output:
+[2025-02-25T16:54:00.907+0000] {subprocess.py:93} INFO - Error: No such container: hdfs
+[2025-02-25T16:54:00.912+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-25T16:54:00.934+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-25T16:54:00.940+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=load_me_if_you_can, task_id=upload_to_hdfs, execution_date=20250224T000000, start_date=20250225T165400, end_date=20250225T165400
+[2025-02-25T16:54:00.962+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 15 for task upload_to_hdfs (Bash command failed. The command returned a non-zero exit code 1.; 86361)
+[2025-02-25T16:54:01.018+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-25T16:54:01.057+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

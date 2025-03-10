@@ -1,0 +1,43 @@
+[2025-02-27T11:32:18.087+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T11:27:04.317794+00:00 [queued]>
+[2025-02-27T11:32:18.097+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T11:27:04.317794+00:00 [queued]>
+[2025-02-27T11:32:18.098+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-27T11:32:18.112+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_into_hbase> on 2025-02-27 11:27:04.317794+00:00
+[2025-02-27T11:32:18.119+0000] {standard_task_runner.py:57} INFO - Started process 1483 to run task
+[2025-02-27T11:32:18.122+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_to_hbase', 'load_into_hbase', 'manual__2025-02-27T11:27:04.317794+00:00', '--job-id', '62', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmp_ve1ruzg']
+[2025-02-27T11:32:18.127+0000] {standard_task_runner.py:85} INFO - Job 62: Subtask load_into_hbase
+[2025-02-27T11:32:18.175+0000] {task_command.py:415} INFO - Running <TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T11:27:04.317794+00:00 [running]> on host bd8db0b15e85
+[2025-02-27T11:32:18.253+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_to_hbase' AIRFLOW_CTX_TASK_ID='load_into_hbase' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T11:27:04.317794+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T11:27:04.317794+00:00'
+[2025-02-27T11:32:28.457+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/thriftpy2/transport/socket.py", line 98, in open
+    self.sock.connect(addr)
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/airflow/dags/load_data.py", line 58, in load_processed_data
+    connection = happybase.Connection('hbase-thrift', port=9090)  # Replace 'namenode' with actual HBase host if different
+  File "/home/airflow/.local/lib/python3.9/site-packages/happybase/connection.py", line 148, in __init__
+    self.open()
+  File "/home/airflow/.local/lib/python3.9/site-packages/happybase/connection.py", line 176, in open
+    self.transport.open()
+  File "thriftpy2/transport/buffered/cybuffered.pyx", line 34, in thriftpy2.transport.buffered.cybuffered.TCyBufferedTransport.open
+  File "/home/airflow/.local/lib/python3.9/site-packages/thriftpy2/transport/socket.py", line 105, in open
+    raise TTransportException(
+thriftpy2.transport.base.TTransportException: TTransportException(type=1, message="Could not connect to ('hbase-thrift', 9090)")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/load_data.py", line 91, in load_processed_data
+    raise AirflowException(f"Failed to load data into HBase: {str(e)}")
+airflow.exceptions.AirflowException: Failed to load data into HBase: TTransportException(type=1, message="Could not connect to ('hbase-thrift', 9090)")
+[2025-02-27T11:32:28.472+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=load_to_hbase, task_id=load_into_hbase, execution_date=20250227T112704, start_date=20250227T113218, end_date=20250227T113228
+[2025-02-27T11:32:28.489+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 62 for task load_into_hbase (Failed to load data into HBase: TTransportException(type=1, message="Could not connect to ('hbase-thrift', 9090)"); 1483)
+[2025-02-27T11:32:28.524+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-27T11:32:28.540+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

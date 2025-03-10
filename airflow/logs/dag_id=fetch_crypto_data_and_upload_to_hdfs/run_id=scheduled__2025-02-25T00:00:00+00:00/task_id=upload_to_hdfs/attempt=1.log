@@ -1,0 +1,26 @@
+[2025-02-26T09:18:15.804+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T09:18:15.814+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T09:18:15.816+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T09:18:15.834+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): upload_to_hdfs> on 2025-02-25 00:00:00+00:00
+[2025-02-26T09:18:15.841+0000] {standard_task_runner.py:57} INFO - Started process 5550 to run task
+[2025-02-26T09:18:15.845+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'scheduled__2025-02-25T00:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmp6_dugiv1']
+[2025-02-26T09:18:15.848+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask upload_to_hdfs
+[2025-02-26T09:18:15.916+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-25T00:00:00+00:00 [running]> on host 76a0b27568e2
+[2025-02-26T09:18:16.007+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-25T00:00:00+00:00'
+[2025-02-26T09:18:20.242+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 316, in upload_to_hdfs
+    raise Exception(f"Command failed: {bash_command}\nError: {result.stderr}")
+Exception: Command failed: docker exec namenode bash -c "hdfs dfs -mkdir -p /user/root/crypto/YYYY=2025/MM=02/DD=25 && hdfs dfs -put -f /tmp/crypto_historical_data.csv /user/root/crypto/YYYY=2025/MM=02/DD=25/crypto_historical_data.csv"
+Error: put: `/tmp/crypto_historical_data.csv': No such file or directory
+
+[2025-02-26T09:18:20.263+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250225T000000, start_date=20250226T091815, end_date=20250226T091820
+[2025-02-26T09:18:20.290+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 7 for task upload_to_hdfs (Command failed: docker exec namenode bash -c "hdfs dfs -mkdir -p /user/root/crypto/YYYY=2025/MM=02/DD=25 && hdfs dfs -put -f /tmp/crypto_historical_data.csv /user/root/crypto/YYYY=2025/MM=02/DD=25/crypto_historical_data.csv"
+Error: put: `/tmp/crypto_historical_data.csv': No such file or directory
+; 5550)
+[2025-02-26T09:18:20.325+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T09:18:20.358+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

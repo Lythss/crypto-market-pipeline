@@ -1,0 +1,30 @@
+[2025-02-24T10:14:14.640+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-24T10:14:08.386382+00:00 [queued]>
+[2025-02-24T10:14:14.649+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-24T10:14:08.386382+00:00 [queued]>
+[2025-02-24T10:14:14.650+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-24T10:14:14.667+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): upload_to_hdfs> on 2025-02-24 10:14:08.386382+00:00
+[2025-02-24T10:14:14.676+0000] {standard_task_runner.py:57} INFO - Started process 55753 to run task
+[2025-02-24T10:14:14.680+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'manual__2025-02-24T10:14:08.386382+00:00', '--job-id', '14', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpko1fp2d0']
+[2025-02-24T10:14:14.684+0000] {standard_task_runner.py:85} INFO - Job 14: Subtask upload_to_hdfs
+[2025-02-24T10:14:14.744+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-24T10:14:08.386382+00:00 [running]> on host 781ad978c51a
+[2025-02-24T10:14:14.839+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T10:14:08.386382+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-24T10:14:08.386382+00:00'
+[2025-02-24T10:14:14.841+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-24T10:14:14.844+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker exec -t namenode bash']
+[2025-02-24T10:14:14.862+0000] {subprocess.py:86} INFO - Output:
+[2025-02-24T10:54:01.047+0000] {local_task_job_runner.py:294} WARNING - State of this instance has been externally set to up_for_retry. Terminating instance.
+[2025-02-24T10:54:01.053+0000] {process_utils.py:131} INFO - Sending 15 to group 55753. PIDs of all processes in the group: [55756, 55753]
+[2025-02-24T10:54:01.054+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 55753
+[2025-02-24T10:54:01.055+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2025-02-24T10:54:01.057+0000] {subprocess.py:104} INFO - Sending SIGTERM signal to process group
+[2025-02-24T10:54:01.083+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 201, in execute
+    result = self.subprocess_hook.run_command(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/hooks/subprocess.py", line 91, in run_command
+    for raw_line in iter(self.sub_process.stdout.readline, b""):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1634, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+[2025-02-24T10:54:01.090+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250224T101408, start_date=20250224T101414, end_date=20250224T105401
+[2025-02-24T10:54:01.109+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 14 for task upload_to_hdfs (Task received SIGTERM signal; 55753)
+[2025-02-24T10:54:01.149+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=55756, status='terminated', started='10:14:14') (55756) terminated with exit code None
+[2025-02-24T10:54:01.150+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=55753, status='terminated', exitcode=1, started='10:14:14') (55753) terminated with exit code 1

@@ -1,0 +1,82 @@
+[2025-02-22T19:17:06.110+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-04T00:00:00+00:00 [queued]>
+[2025-02-22T19:17:06.206+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-04T00:00:00+00:00 [queued]>
+[2025-02-22T19:17:06.218+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2025-02-22T19:17:06.326+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-04 00:00:00+00:00
+[2025-02-22T19:17:06.358+0000] {standard_task_runner.py:57} INFO - Started process 1007 to run task
+[2025-02-22T19:17:06.405+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'fetch_data', 'scheduled__2025-01-04T00:00:00+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmphoomvr3g']
+[2025-02-22T19:17:06.422+0000] {standard_task_runner.py:85} INFO - Job 30: Subtask fetch_data
+[2025-02-22T19:17:06.765+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-04T00:00:00+00:00 [running]> on host 972836975d47
+[2025-02-22T19:17:07.175+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-04T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-04T00:00:00+00:00'
+[2025-02-22T19:17:07.644+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-02-22T19:17:07.678+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=coingecko_ingestion_dag, task_id=fetch_data, execution_date=20250104T000000, start_date=20250222T191706, end_date=20250222T191707
+[2025-02-22T19:17:07.816+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-22T19:17:07.930+0000] {taskinstance.py:2776} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-02-23T00:22:35.050+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-04T00:00:00+00:00 [queued]>
+[2025-02-23T00:22:35.094+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-04T00:00:00+00:00 [queued]>
+[2025-02-23T00:22:35.095+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2025-02-23T00:22:35.179+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): fetch_data> on 2025-01-04 00:00:00+00:00
+[2025-02-23T00:22:35.219+0000] {standard_task_runner.py:57} INFO - Started process 1216 to run task
+[2025-02-23T00:22:35.231+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'fetch_data', 'scheduled__2025-01-04T00:00:00+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpkrn3yt2_']
+[2025-02-23T00:22:35.242+0000] {standard_task_runner.py:85} INFO - Job 11: Subtask fetch_data
+[2025-02-23T00:22:35.706+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.fetch_data scheduled__2025-01-04T00:00:00+00:00 [running]> on host 49036eb7676e
+[2025-02-23T00:22:36.378+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='fetch_data' AIRFLOW_CTX_EXECUTION_DATE='2025-01-04T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-01-04T00:00:00+00:00'
+[2025-02-23T00:22:36.461+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 714, in urlopen
+    httplib_response = self._make_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 403, in _make_request
+    self._validate_conn(conn)
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 1053, in _validate_conn
+    conn.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 363, in connect
+    self.sock = conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x7f4857aee100>: Failed to establish a new connection: [Errno -2] Name or service not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/connectionpool.py", line 798, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.8/site-packages/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f4857aee100>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 26, in fetch_coingecko_data
+    response = requests.get(url, params=params)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 73, in get
+    return request("get", url, params=params, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f4857aee100>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+[2025-02-23T00:22:36.614+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=fetch_data, execution_date=20250104T000000, start_date=20250223T002235, end_date=20250223T002236
+[2025-02-23T00:22:36.682+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 11 for task fetch_data (HTTPSConnectionPool(host='api.coingecko.com', port=443): Max retries exceeded with url: /api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x7f4857aee100>: Failed to establish a new connection: [Errno -2] Name or service not known')); 1216)
+[2025-02-23T00:22:36.731+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-23T00:22:37.130+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

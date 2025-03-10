@@ -1,0 +1,17 @@
+[2025-02-26T09:22:01.462+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-26T09:21:49.984883+00:00 [queued]>
+[2025-02-26T09:22:01.475+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-26T09:21:49.984883+00:00 [queued]>
+[2025-02-26T09:22:01.476+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T09:22:01.494+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): upload_to_hdfs> on 2025-02-26 09:21:49.984883+00:00
+[2025-02-26T09:22:01.502+0000] {standard_task_runner.py:57} INFO - Started process 9467 to run task
+[2025-02-26T09:22:01.507+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'manual__2025-02-26T09:21:49.984883+00:00', '--job-id', '9', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpaldct_uh']
+[2025-02-26T09:22:01.510+0000] {standard_task_runner.py:85} INFO - Job 9: Subtask upload_to_hdfs
+[2025-02-26T09:22:01.566+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-26T09:21:49.984883+00:00 [running]> on host 76a0b27568e2
+[2025-02-26T09:22:01.659+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-26T09:21:49.984883+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-26T09:21:49.984883+00:00'
+[2025-02-26T09:22:01.663+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T09:22:01.666+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker cp /tmp/crypto_historical_data.csv namenode:/tmp/crypto_historical_data.csv && docker exec namenode hdfs dfs -put -f /tmp/crypto_historical_data.csv /user/root/crypto_historical_data.csv']
+[2025-02-26T09:22:01.689+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T09:22:04.127+0000] {subprocess.py:93} INFO - 2025-02-26 09:22:04,125 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+[2025-02-26T09:22:05.404+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-02-26T09:22:05.443+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250226T092149, start_date=20250226T092201, end_date=20250226T092205
+[2025-02-26T09:22:05.469+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T09:22:05.491+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

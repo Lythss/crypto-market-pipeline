@@ -1,0 +1,26 @@
+[2025-02-27T11:05:38.040+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-27T11:00:16.776078+00:00 [queued]>
+[2025-02-27T11:05:38.054+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-27T11:00:16.776078+00:00 [queued]>
+[2025-02-27T11:05:38.055+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-27T11:05:38.074+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): upload_to_hdfs> on 2025-02-27 11:00:16.776078+00:00
+[2025-02-27T11:05:38.082+0000] {standard_task_runner.py:57} INFO - Started process 435 to run task
+[2025-02-27T11:05:38.087+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'manual__2025-02-27T11:00:16.776078+00:00', '--job-id', '52', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpi12_zd_s']
+[2025-02-27T11:05:38.093+0000] {standard_task_runner.py:85} INFO - Job 52: Subtask upload_to_hdfs
+[2025-02-27T11:05:38.156+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-27T11:00:16.776078+00:00 [running]> on host bd8db0b15e85
+[2025-02-27T11:05:38.284+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T11:00:16.776078+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T11:00:16.776078+00:00'
+[2025-02-27T11:05:38.301+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 58, in upload_to_hdfs
+    raise Exception(f"Command failed: {bash_command}\nError: {result.stderr}")
+Exception: Command failed: doc&&docker exec namenode bash -c "hdfs dfs -mkdir -p /user/root/crypto/YYYY=2025/MM=02/DD=27 && hdfs dfs -put -f /tmp/crypto_historical_data.csv /user/root/crypto/YYYY=2025/MM=02/DD=27/crypto_historical_data.csv"
+Error: /bin/sh: 1: doc: Permission denied
+
+[2025-02-27T11:05:38.316+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250227T110016, start_date=20250227T110538, end_date=20250227T110538
+[2025-02-27T11:05:38.333+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 52 for task upload_to_hdfs (Command failed: doc&&docker exec namenode bash -c "hdfs dfs -mkdir -p /user/root/crypto/YYYY=2025/MM=02/DD=27 && hdfs dfs -put -f /tmp/crypto_historical_data.csv /user/root/crypto/YYYY=2025/MM=02/DD=27/crypto_historical_data.csv"
+Error: /bin/sh: 1: doc: Permission denied
+; 435)
+[2025-02-27T11:05:38.345+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-27T11:05:38.372+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

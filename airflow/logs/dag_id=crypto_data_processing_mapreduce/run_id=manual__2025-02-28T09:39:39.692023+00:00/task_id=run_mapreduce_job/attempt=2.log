@@ -1,0 +1,31 @@
+[2025-02-28T09:44:46.903+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-28T09:39:39.692023+00:00 [queued]>
+[2025-02-28T09:44:46.913+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-28T09:39:39.692023+00:00 [queued]>
+[2025-02-28T09:44:46.914+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-28T09:44:46.930+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-28 09:39:39.692023+00:00
+[2025-02-28T09:44:46.935+0000] {standard_task_runner.py:57} INFO - Started process 889 to run task
+[2025-02-28T09:44:46.938+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'crypto_data_processing_mapreduce', 'run_mapreduce_job', 'manual__2025-02-28T09:39:39.692023+00:00', '--job-id', '12', '--raw', '--subdir', 'DAGS_FOLDER/transform_data.py', '--cfg-path', '/tmp/tmp5aiw6os4']
+[2025-02-28T09:44:46.941+0000] {standard_task_runner.py:85} INFO - Job 12: Subtask run_mapreduce_job
+[2025-02-28T09:44:46.987+0000] {task_command.py:415} INFO - Running <TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-28T09:39:39.692023+00:00 [running]> on host bfe91925d4dd
+[2025-02-28T09:44:47.036+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.9/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-28T09:44:47.065+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_data_processing_mapreduce' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-28T09:39:39.692023+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-28T09:39:39.692023+00:00'
+[2025-02-28T09:44:47.068+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-28T09:44:47.070+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n                docker exec namenode bash -c "cd /home &&                 hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar                 -input /user/root/crypto/YYYY=2025/MM=02/DD=28/crypto_historical_data.csv                 -output /user/root/crypto/processed/YYYY=2025/MM=02/DD=28                 -mapper \'/usr/bin/python3 /home/mapper.py\'                 -reducer \'/usr/bin/python3 /home/reducer.py\'                 -file /home/mapper.py                 -file /home/reducer.py"\n            ']
+[2025-02-28T09:44:47.080+0000] {subprocess.py:86} INFO - Output:
+[2025-02-28T09:44:47.810+0000] {subprocess.py:93} INFO - 2025-02-28 09:44:47,807 WARN streaming.StreamJob: -file option is deprecated, please use generic option -files instead.
+[2025-02-28T09:44:48.690+0000] {subprocess.py:93} INFO - packageJobJar: [/home/mapper.py, /home/reducer.py] [] /tmp/streamjob3140566148419706750.jar tmpDir=null
+[2025-02-28T09:44:48.783+0000] {subprocess.py:93} INFO - 2025-02-28 09:44:48,781 INFO impl.MetricsConfig: Loaded properties from hadoop-metrics2.properties
+[2025-02-28T09:44:48.929+0000] {subprocess.py:93} INFO - 2025-02-28 09:44:48,927 INFO impl.MetricsSystemImpl: Scheduled Metric snapshot period at 10 second(s).
+[2025-02-28T09:44:48.930+0000] {subprocess.py:93} INFO - 2025-02-28 09:44:48,927 INFO impl.MetricsSystemImpl: JobTracker metrics system started
+[2025-02-28T09:44:48.947+0000] {subprocess.py:93} INFO - 2025-02-28 09:44:48,945 WARN impl.MetricsSystemImpl: JobTracker metrics system already initialized!
+[2025-02-28T09:44:49.077+0000] {subprocess.py:93} INFO - 2025-02-28 09:44:49,075 ERROR streaming.StreamJob: Error Launching job : Output directory hdfs://namenode:9000/user/root/crypto/processed/YYYY=2025/MM=02/DD=28 already exists
+[2025-02-28T09:44:49.078+0000] {subprocess.py:93} INFO - Streaming Command Failed!
+[2025-02-28T09:44:49.548+0000] {subprocess.py:97} INFO - Command exited with return code 5
+[2025-02-28T09:44:49.569+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 5.
+[2025-02-28T09:44:49.574+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=crypto_data_processing_mapreduce, task_id=run_mapreduce_job, execution_date=20250228T093939, start_date=20250228T094446, end_date=20250228T094449
+[2025-02-28T09:44:49.603+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 12 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 5.; 889)
+[2025-02-28T09:44:49.649+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-28T09:44:49.673+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

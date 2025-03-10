@@ -1,0 +1,43 @@
+[2025-02-27T16:02:33.984+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T16:02:30.363785+00:00 [queued]>
+[2025-02-27T16:02:34.000+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T16:02:30.363785+00:00 [queued]>
+[2025-02-27T16:02:34.001+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-27T16:02:34.026+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_into_hbase> on 2025-02-27 16:02:30.363785+00:00
+[2025-02-27T16:02:34.039+0000] {standard_task_runner.py:57} INFO - Started process 4692 to run task
+[2025-02-27T16:02:34.045+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_to_hbase', 'load_into_hbase', 'manual__2025-02-27T16:02:30.363785+00:00', '--job-id', '21', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmpc4s7bzkp']
+[2025-02-27T16:02:34.051+0000] {standard_task_runner.py:85} INFO - Job 21: Subtask load_into_hbase
+[2025-02-27T16:02:34.146+0000] {task_command.py:415} INFO - Running <TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T16:02:30.363785+00:00 [running]> on host b0117377cc2b
+[2025-02-27T16:02:34.295+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_to_hbase' AIRFLOW_CTX_TASK_ID='load_into_hbase' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T16:02:30.363785+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T16:02:30.363785+00:00'
+[2025-02-27T16:02:39.216+0000] {logging_mixin.py:151} INFO - Creating table 'crypto_prices'
+[2025-02-27T16:10:20.007+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/load_data.py", line 50, in load_processed_data
+    connection.create_table(
+  File "/home/airflow/.local/lib/python3.9/site-packages/happybase/connection.py", line 309, in create_table
+    self.client.createTable(name, column_descriptors)
+  File "/home/airflow/.local/lib/python3.9/site-packages/thriftpy2/thrift.py", line 214, in _req
+    return self._recv(_api)
+  File "/home/airflow/.local/lib/python3.9/site-packages/thriftpy2/thrift.py", line 228, in _recv
+    fname, mtype, rseqid = self._iprot.read_message_begin()
+  File "thriftpy2/protocol/cybin/cybin.pyx", line 475, in thriftpy2.protocol.cybin.cybin.TCyBinaryProtocol.read_message_begin
+  File "thriftpy2/protocol/cybin/cybin.pyx", line 68, in thriftpy2.protocol.cybin.cybin.read_i32
+  File "thriftpy2/transport/buffered/cybuffered.pyx", line 65, in thriftpy2.transport.buffered.cybuffered.TCyBufferedTransport.c_read
+  File "thriftpy2/transport/buffered/cybuffered.pyx", line 69, in thriftpy2.transport.buffered.cybuffered.TCyBufferedTransport.read_trans
+  File "thriftpy2/transport/cybase.pyx", line 61, in thriftpy2.transport.cybase.TCyBuffer.read_trans
+  File "/home/airflow/.local/lib/python3.9/site-packages/thriftpy2/transport/socket.py", line 131, in read
+    raise TTransportException(type=TTransportException.END_OF_FILE,
+thriftpy2.transport.base.TTransportException: TTransportException(type=4, message='TSocket read 0 bytes')
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/load_data.py", line 80, in load_processed_data
+    raise AirflowException(f"Failed to load data into HBase: {str(e)}")
+airflow.exceptions.AirflowException: Failed to load data into HBase: TTransportException(type=4, message='TSocket read 0 bytes')
+[2025-02-27T16:10:20.025+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=load_to_hbase, task_id=load_into_hbase, execution_date=20250227T160230, start_date=20250227T160233, end_date=20250227T161020
+[2025-02-27T16:10:20.053+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 21 for task load_into_hbase (Failed to load data into HBase: TTransportException(type=4, message='TSocket read 0 bytes'); 4692)
+[2025-02-27T16:10:20.089+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-27T16:10:20.118+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

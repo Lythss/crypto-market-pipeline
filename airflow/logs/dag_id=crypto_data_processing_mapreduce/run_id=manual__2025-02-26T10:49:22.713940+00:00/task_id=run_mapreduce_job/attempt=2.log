@@ -1,0 +1,69 @@
+[2025-02-26T10:54:28.302+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-26T10:49:22.713940+00:00 [queued]>
+[2025-02-26T10:54:28.312+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-26T10:49:22.713940+00:00 [queued]>
+[2025-02-26T10:54:28.313+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-26T10:54:28.329+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-26 10:49:22.713940+00:00
+[2025-02-26T10:54:28.334+0000] {standard_task_runner.py:57} INFO - Started process 51363 to run task
+[2025-02-26T10:54:28.337+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'crypto_data_processing_mapreduce', 'run_mapreduce_job', 'manual__2025-02-26T10:49:22.713940+00:00', '--job-id', '15', '--raw', '--subdir', 'DAGS_FOLDER/transform_data.py', '--cfg-path', '/tmp/tmp56s2rqbc']
+[2025-02-26T10:54:28.340+0000] {standard_task_runner.py:85} INFO - Job 15: Subtask run_mapreduce_job
+[2025-02-26T10:54:28.408+0000] {task_command.py:415} INFO - Running <TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-26T10:49:22.713940+00:00 [running]> on host c0f81276e31d
+[2025-02-26T10:54:28.481+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.9/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-26T10:54:28.517+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_data_processing_mapreduce' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-26T10:49:22.713940+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-26T10:49:22.713940+00:00'
+[2025-02-26T10:54:28.519+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T10:54:28.522+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', "\n            docker exec namenode bash -c 'cd /home/ && hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar             -input /user/root/crypto/YYYY=2025/MM=02/DD=26/crypto_historical_data.csv             -output /user/root/crypto/processed/YYYY=2025/MM=02/DD=26             -mapper mapper.py             -reducer reducer.py             -files mapper.py,reducer.py'\n            "]
+[2025-02-26T10:54:28.535+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T10:54:29.322+0000] {subprocess.py:93} INFO - 2025-02-26 10:54:29,319 ERROR streaming.StreamJob: Unrecognized option: -files
+[2025-02-26T10:54:29.323+0000] {subprocess.py:93} INFO - Usage: $HADOOP_HOME/bin/hadoop jar hadoop-streaming.jar [options]
+[2025-02-26T10:54:29.324+0000] {subprocess.py:93} INFO - Options:
+[2025-02-26T10:54:29.325+0000] {subprocess.py:93} INFO -   -input          <path> DFS input file(s) for the Map step.
+[2025-02-26T10:54:29.326+0000] {subprocess.py:93} INFO -   -output         <path> DFS output directory for the Reduce step.
+[2025-02-26T10:54:29.327+0000] {subprocess.py:93} INFO -   -mapper         <cmd|JavaClassName> Optional. Command to be run as mapper.
+[2025-02-26T10:54:29.327+0000] {subprocess.py:93} INFO -   -combiner       <cmd|JavaClassName> Optional. Command to be run as combiner.
+[2025-02-26T10:54:29.328+0000] {subprocess.py:93} INFO -   -reducer        <cmd|JavaClassName> Optional. Command to be run as reducer.
+[2025-02-26T10:54:29.328+0000] {subprocess.py:93} INFO -   -file           <file> Optional. File/dir to be shipped in the Job jar file.
+[2025-02-26T10:54:29.329+0000] {subprocess.py:93} INFO -                   Deprecated. Use generic option "-files" instead.
+[2025-02-26T10:54:29.329+0000] {subprocess.py:93} INFO -   -inputformat    <TextInputFormat(default)|SequenceFileAsTextInputFormat|JavaClassName>
+[2025-02-26T10:54:29.330+0000] {subprocess.py:93} INFO -                   Optional. The input format class.
+[2025-02-26T10:54:29.330+0000] {subprocess.py:93} INFO -   -outputformat   <TextOutputFormat(default)|JavaClassName>
+[2025-02-26T10:54:29.331+0000] {subprocess.py:93} INFO -                   Optional. The output format class.
+[2025-02-26T10:54:29.331+0000] {subprocess.py:93} INFO -   -partitioner    <JavaClassName>  Optional. The partitioner class.
+[2025-02-26T10:54:29.332+0000] {subprocess.py:93} INFO -   -numReduceTasks <num> Optional. Number of reduce tasks.
+[2025-02-26T10:54:29.332+0000] {subprocess.py:93} INFO -   -inputreader    <spec> Optional. Input recordreader spec.
+[2025-02-26T10:54:29.333+0000] {subprocess.py:93} INFO -   -cmdenv         <n>=<v> Optional. Pass env.var to streaming commands.
+[2025-02-26T10:54:29.333+0000] {subprocess.py:93} INFO -   -mapdebug       <cmd> Optional. To run this script when a map task fails.
+[2025-02-26T10:54:29.334+0000] {subprocess.py:93} INFO -   -reducedebug    <cmd> Optional. To run this script when a reduce task fails.
+[2025-02-26T10:54:29.334+0000] {subprocess.py:93} INFO -   -io             <identifier> Optional. Format to use for input to and output
+[2025-02-26T10:54:29.334+0000] {subprocess.py:93} INFO -                   from mapper/reducer commands
+[2025-02-26T10:54:29.335+0000] {subprocess.py:93} INFO -   -lazyOutput     Optional. Lazily create Output.
+[2025-02-26T10:54:29.335+0000] {subprocess.py:93} INFO -   -background     Optional. Submit the job and don't wait till it completes.
+[2025-02-26T10:54:29.336+0000] {subprocess.py:93} INFO -   -verbose        Optional. Print verbose output.
+[2025-02-26T10:54:29.336+0000] {subprocess.py:93} INFO -   -info           Optional. Print detailed usage.
+[2025-02-26T10:54:29.337+0000] {subprocess.py:93} INFO -   -help           Optional. Print help message.
+[2025-02-26T10:54:29.337+0000] {subprocess.py:93} INFO - 
+[2025-02-26T10:54:29.337+0000] {subprocess.py:93} INFO - Generic options supported are:
+[2025-02-26T10:54:29.338+0000] {subprocess.py:93} INFO - -conf <configuration file>        specify an application configuration file
+[2025-02-26T10:54:29.338+0000] {subprocess.py:93} INFO - -D <property=value>               define a value for a given property
+[2025-02-26T10:54:29.339+0000] {subprocess.py:93} INFO - -fs <file:///|hdfs://namenode:port> specify default filesystem URL to use, overrides 'fs.defaultFS' property from configurations.
+[2025-02-26T10:54:29.339+0000] {subprocess.py:93} INFO - -jt <local|resourcemanager:port>  specify a ResourceManager
+[2025-02-26T10:54:29.340+0000] {subprocess.py:93} INFO - -files <file1,...>                specify a comma-separated list of files to be copied to the map reduce cluster
+[2025-02-26T10:54:29.340+0000] {subprocess.py:93} INFO - -libjars <jar1,...>               specify a comma-separated list of jar files to be included in the classpath
+[2025-02-26T10:54:29.340+0000] {subprocess.py:93} INFO - -archives <archive1,...>          specify a comma-separated list of archives to be unarchived on the compute machines
+[2025-02-26T10:54:29.341+0000] {subprocess.py:93} INFO - 
+[2025-02-26T10:54:29.341+0000] {subprocess.py:93} INFO - The general command line syntax is:
+[2025-02-26T10:54:29.342+0000] {subprocess.py:93} INFO - command [genericOptions] [commandOptions]
+[2025-02-26T10:54:29.342+0000] {subprocess.py:93} INFO - 
+[2025-02-26T10:54:29.343+0000] {subprocess.py:93} INFO - 
+[2025-02-26T10:54:29.343+0000] {subprocess.py:93} INFO - For more details about these options:
+[2025-02-26T10:54:29.344+0000] {subprocess.py:93} INFO - Use $HADOOP_HOME/bin/hadoop jar hadoop-streaming.jar -info
+[2025-02-26T10:54:29.345+0000] {subprocess.py:93} INFO - 
+[2025-02-26T10:54:29.345+0000] {subprocess.py:93} INFO - Try -help for more information
+[2025-02-26T10:54:29.346+0000] {subprocess.py:93} INFO - Streaming Command Failed!
+[2025-02-26T10:54:29.381+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-26T10:54:29.397+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-26T10:54:29.401+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=crypto_data_processing_mapreduce, task_id=run_mapreduce_job, execution_date=20250226T104922, start_date=20250226T105428, end_date=20250226T105429
+[2025-02-26T10:54:29.416+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 15 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 1.; 51363)
+[2025-02-26T10:54:29.434+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T10:54:29.460+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

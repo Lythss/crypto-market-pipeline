@@ -1,0 +1,95 @@
+[2025-02-24T09:44:56.319+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-23T00:00:00+00:00 [queued]>
+[2025-02-24T09:44:56.330+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-23T00:00:00+00:00 [queued]>
+[2025-02-24T09:44:56.331+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-24T09:44:56.352+0000] {taskinstance.py:1382} INFO - Executing <Task(DockerOperator): upload_to_hdfs> on 2025-02-23 00:00:00+00:00
+[2025-02-24T09:44:56.360+0000] {standard_task_runner.py:57} INFO - Started process 25397 to run task
+[2025-02-24T09:44:56.364+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'scheduled__2025-02-23T00:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmp0v_exhhh']
+[2025-02-24T09:44:56.368+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask upload_to_hdfs
+[2025-02-24T09:44:56.436+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-23T00:00:00+00:00 [running]> on host 781ad978c51a
+[2025-02-24T09:44:56.526+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-23T00:00:00+00:00'
+[2025-02-24T09:44:56.557+0000] {docker.py:333} INFO - Starting docker container from image apache/***:2.7.0-python3.9
+[2025-02-24T09:44:56.572+0000] {docker.py:341} WARNING - Using remote engine or docker-in-docker and mounting temporary volume from host is not supported. Falling back to `mount_tmp_dir=False` mode. You can set `mount_tmp_dir` parameter to False to disable mounting and remove the warning
+[2025-02-24T09:44:56.592+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 268, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.9/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: http+docker://localhost/v1.47/containers/create?name=namenode
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 338, in _run_image
+    return self._run_image_with_mounts(self.mounts + [tmp_mount], add_tmp_variable=True)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 365, in _run_image_with_mounts
+    self.container = self.cli.create_container(
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/container.py", line 431, in create_container
+    return self.create_container_from_config(config, name, platform)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/container.py", line 448, in create_container_from_config
+    return self._result(res, True)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 274, in _result
+    self._raise_for_status(response)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 270, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 400 Client Error for http+docker://localhost/v1.47/containers/create?name=namenode: Bad Request ("invalid mount config for type "bind": bind source path does not exist: /tmp/airflowtmpzar0m0qe")
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 268, in _raise_for_status
+    response.raise_for_status()
+  File "/home/airflow/.local/lib/python3.9/site-packages/requests/models.py", line 1021, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 409 Client Error: Conflict for url: http+docker://localhost/v1.47/containers/create?name=namenode
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 476, in execute
+    return self._run_image()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 347, in _run_image
+    return self._run_image_with_mounts(self.mounts, add_tmp_variable=False)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/providers/docker/operators/docker.py", line 365, in _run_image_with_mounts
+    self.container = self.cli.create_container(
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/container.py", line 431, in create_container
+    return self.create_container_from_config(config, name, platform)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/container.py", line 448, in create_container_from_config
+    return self._result(res, True)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 274, in _result
+    self._raise_for_status(response)
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/api/client.py", line 270, in _raise_for_status
+    raise create_api_error_from_http_exception(e) from e
+  File "/home/airflow/.local/lib/python3.9/site-packages/docker/errors.py", line 39, in create_api_error_from_http_exception
+    raise cls(e, response=response, explanation=explanation) from e
+docker.errors.APIError: 409 Client Error for http+docker://localhost/v1.47/containers/create?name=namenode: Conflict ("Conflict. The container name "/namenode" is already in use by container "0f1931b12c1516b541dea3916ae80085c3e288366b60304f2d69236e273c8d59". You have to remove (or rename) that container to be able to reuse that name.")
+[2025-02-24T09:44:56.606+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250223T000000, start_date=20250224T094456, end_date=20250224T094456
+[2025-02-24T09:44:56.625+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 7 for task upload_to_hdfs (409 Client Error for http+docker://localhost/v1.47/containers/create?name=namenode: Conflict ("Conflict. The container name "/namenode" is already in use by container "0f1931b12c1516b541dea3916ae80085c3e288366b60304f2d69236e273c8d59". You have to remove (or rename) that container to be able to reuse that name."); 25397)
+[2025-02-24T09:44:56.657+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-24T09:44:56.688+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-24T11:38:59.026+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-23T00:00:00+00:00 [queued]>
+[2025-02-24T11:38:59.042+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-23T00:00:00+00:00 [queued]>
+[2025-02-24T11:38:59.043+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-24T11:38:59.062+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): upload_to_hdfs> on 2025-02-23 00:00:00+00:00
+[2025-02-24T11:38:59.070+0000] {standard_task_runner.py:57} INFO - Started process 13288 to run task
+[2025-02-24T11:38:59.075+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'scheduled__2025-02-23T00:00:00+00:00', '--job-id', '11', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpa2udk4qc']
+[2025-02-24T11:38:59.080+0000] {standard_task_runner.py:85} INFO - Job 11: Subtask upload_to_hdfs
+[2025-02-24T11:38:59.156+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs scheduled__2025-02-23T00:00:00+00:00 [running]> on host a57837beda44
+[2025-02-24T11:38:59.264+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-23T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-23T00:00:00+00:00'
+[2025-02-24T11:38:59.268+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-24T11:38:59.270+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker cp /tmp/crypto_historical_data.csv namenode:/tmp/crypto_historical_data.csv && docker exec namenode hdfs dfs -put -f /tmp/crypto_historical_data.csv /user/root/crypto_historical_data.csv']
+[2025-02-24T11:38:59.290+0000] {subprocess.py:86} INFO - Output:
+[2025-02-24T11:39:02.254+0000] {subprocess.py:93} INFO - 2025-02-24 11:39:02,251 INFO sasl.SaslDataTransferClient: SASL encryption trust check: localHostTrusted = false, remoteHostTrusted = false
+[2025-02-24T11:39:02.513+0000] {subprocess.py:93} INFO - put: File does not exist: /user/root/crypto_historical_data.csv._COPYING_ (inode 16395) Holder DFSClient_NONMAPREDUCE_230720065_1 does not have any open files.
+[2025-02-24T11:39:02.984+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-24T11:39:03.004+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-24T11:39:03.010+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250223T000000, start_date=20250224T113859, end_date=20250224T113903
+[2025-02-24T11:39:03.025+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 11 for task upload_to_hdfs (Bash command failed. The command returned a non-zero exit code 1.; 13288)
+[2025-02-24T11:39:03.048+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-24T11:39:03.080+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

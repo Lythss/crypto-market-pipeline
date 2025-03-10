@@ -1,0 +1,12 @@
+[2025-02-27T15:33:06.250+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T15:28:01.610383+00:00 [queued]>
+[2025-02-27T15:33:06.259+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T15:28:01.610383+00:00 [queued]>
+[2025-02-27T15:33:06.260+0000] {taskinstance.py:1361} INFO - Starting attempt 2 of 2
+[2025-02-27T15:33:06.275+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_into_hbase> on 2025-02-27 15:28:01.610383+00:00
+[2025-02-27T15:33:06.280+0000] {standard_task_runner.py:57} INFO - Started process 4097 to run task
+[2025-02-27T15:33:06.283+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_to_hbase', 'load_into_hbase', 'manual__2025-02-27T15:28:01.610383+00:00', '--job-id', '20', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmp5wla8ri4']
+[2025-02-27T15:33:06.287+0000] {standard_task_runner.py:85} INFO - Job 20: Subtask load_into_hbase
+[2025-02-27T15:33:06.342+0000] {task_command.py:415} INFO - Running <TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T15:28:01.610383+00:00 [running]> on host b0117377cc2b
+[2025-02-27T15:33:06.429+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_to_hbase' AIRFLOW_CTX_TASK_ID='load_into_hbase' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T15:28:01.610383+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T15:28:01.610383+00:00'
+[2025-02-27T15:33:09.207+0000] {logging_mixin.py:151} INFO - Creating table 'crypto_prices'
+[2025-02-27T15:49:38.201+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-27T15:49:38.239+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

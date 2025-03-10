@@ -1,0 +1,80 @@
+[2025-02-28T03:20:59.998+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase scheduled__2025-02-27T00:00:00+00:00 [queued]>
+[2025-02-28T03:21:00.011+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase scheduled__2025-02-27T00:00:00+00:00 [queued]>
+[2025-02-28T03:21:00.012+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-28T03:21:00.038+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_into_hbase> on 2025-02-27 00:00:00+00:00
+[2025-02-28T03:21:00.048+0000] {standard_task_runner.py:57} INFO - Started process 14046 to run task
+[2025-02-28T03:21:00.052+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_to_hbase', 'load_into_hbase', 'scheduled__2025-02-27T00:00:00+00:00', '--job-id', '24', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmpe2d775pk']
+[2025-02-28T03:21:00.055+0000] {standard_task_runner.py:85} INFO - Job 24: Subtask load_into_hbase
+[2025-02-28T03:21:00.126+0000] {task_command.py:415} INFO - Running <TaskInstance: load_to_hbase.load_into_hbase scheduled__2025-02-27T00:00:00+00:00 [running]> on host b0117377cc2b
+[2025-02-28T03:21:00.243+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_to_hbase' AIRFLOW_CTX_TASK_ID='load_into_hbase' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-27T00:00:00+00:00'
+[2025-02-28T09:11:30.332+0000] {local_task_job_runner.py:294} WARNING - State of this instance has been externally set to up_for_retry. Terminating instance.
+[2025-02-28T09:11:30.350+0000] {process_utils.py:131} INFO - Sending 15 to group 14046. PIDs of all processes in the group: [14046]
+[2025-02-28T09:11:30.352+0000] {process_utils.py:86} INFO - Sending the signal 15 to group 14046
+[2025-02-28T09:11:30.353+0000] {taskinstance.py:1632} ERROR - Received SIGTERM. Terminating subprocesses.
+[2025-02-28T09:11:30.407+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/load_data.py", line 48, in load_processed_data
+    if 'crypto_prices' not in connection.tables():
+  File "/home/airflow/.local/lib/python3.9/site-packages/happybase/connection.py", line 242, in tables
+    names = self.client.getTableNames()
+  File "/home/airflow/.local/lib/python3.9/site-packages/thriftpy2/thrift.py", line 214, in _req
+    return self._recv(_api)
+  File "/home/airflow/.local/lib/python3.9/site-packages/thriftpy2/thrift.py", line 228, in _recv
+    fname, mtype, rseqid = self._iprot.read_message_begin()
+  File "thriftpy2/protocol/cybin/cybin.pyx", line 475, in thriftpy2.protocol.cybin.cybin.TCyBinaryProtocol.read_message_begin
+  File "thriftpy2/protocol/cybin/cybin.pyx", line 68, in thriftpy2.protocol.cybin.cybin.read_i32
+  File "thriftpy2/transport/buffered/cybuffered.pyx", line 65, in thriftpy2.transport.buffered.cybuffered.TCyBufferedTransport.c_read
+  File "thriftpy2/transport/buffered/cybuffered.pyx", line 69, in thriftpy2.transport.buffered.cybuffered.TCyBufferedTransport.read_trans
+  File "thriftpy2/transport/cybase.pyx", line 61, in thriftpy2.transport.cybase.TCyBuffer.read_trans
+  File "/home/airflow/.local/lib/python3.9/site-packages/thriftpy2/transport/socket.py", line 112, in read
+    buff = self.sock.recv(sz)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1634, in signal_handler
+    raise AirflowException("Task received SIGTERM signal")
+airflow.exceptions.AirflowException: Task received SIGTERM signal
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/load_data.py", line 80, in load_processed_data
+    raise AirflowException(f"Failed to load data into HBase: {str(e)}")
+airflow.exceptions.AirflowException: Failed to load data into HBase: Task received SIGTERM signal
+[2025-02-28T09:11:30.460+0000] {taskinstance.py:1400} INFO - Marking task as FAILED. dag_id=load_to_hbase, task_id=load_into_hbase, execution_date=20250227T000000, start_date=20250228T032059, end_date=20250228T091130
+[2025-02-28T09:11:30.530+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 24 for task load_into_hbase (Failed to load data into HBase: Task received SIGTERM signal; 14046)
+[2025-02-28T09:11:30.607+0000] {process_utils.py:79} INFO - Process psutil.Process(pid=14046, status='terminated', exitcode=1, started='03:20:59') (14046) terminated with exit code 1
+[2025-02-28T09:58:35.990+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase scheduled__2025-02-27T00:00:00+00:00 [queued]>
+[2025-02-28T09:58:36.003+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase scheduled__2025-02-27T00:00:00+00:00 [queued]>
+[2025-02-28T09:58:36.004+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-28T09:58:36.031+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_into_hbase> on 2025-02-27 00:00:00+00:00
+[2025-02-28T09:58:36.049+0000] {standard_task_runner.py:57} INFO - Started process 1382 to run task
+[2025-02-28T09:58:36.056+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_to_hbase', 'load_into_hbase', 'scheduled__2025-02-27T00:00:00+00:00', '--job-id', '16', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmpqfdz_yu6']
+[2025-02-28T09:58:36.060+0000] {standard_task_runner.py:85} INFO - Job 16: Subtask load_into_hbase
+[2025-02-28T09:58:36.146+0000] {task_command.py:415} INFO - Running <TaskInstance: load_to_hbase.load_into_hbase scheduled__2025-02-27T00:00:00+00:00 [running]> on host bfe91925d4dd
+[2025-02-28T09:58:36.261+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_to_hbase' AIRFLOW_CTX_TASK_ID='load_into_hbase' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-27T00:00:00+00:00'
+[2025-02-28T09:58:39.393+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/load_data.py", line 22, in load_processed_data
+    subprocess.run(
+  File "/usr/local/lib/python3.9/subprocess.py", line 528, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['docker', 'exec', 'namenode', 'hdfs', 'dfs', '-get', '/user/root/crypto/processed/YYYY=2025/MM=02/DD=27/part-00000', '/tmp/crypto_agg.csv']' returned non-zero exit status 1.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/load_data.py", line 41, in load_processed_data
+    raise AirflowException(f"Failed to fetch HDFS file: {e.stderr}")
+airflow.exceptions.AirflowException: Failed to fetch HDFS file: get: `/user/root/crypto/processed/YYYY=2025/MM=02/DD=27/part-00000': No such file or directory
+
+[2025-02-28T09:58:39.407+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=load_to_hbase, task_id=load_into_hbase, execution_date=20250227T000000, start_date=20250228T095835, end_date=20250228T095839
+[2025-02-28T09:58:39.423+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 16 for task load_into_hbase (Failed to fetch HDFS file: get: `/user/root/crypto/processed/YYYY=2025/MM=02/DD=27/part-00000': No such file or directory
+; 1382)
+[2025-02-28T09:58:39.458+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-28T09:58:39.475+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

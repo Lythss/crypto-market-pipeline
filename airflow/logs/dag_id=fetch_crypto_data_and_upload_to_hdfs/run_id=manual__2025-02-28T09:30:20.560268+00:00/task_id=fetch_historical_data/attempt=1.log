@@ -1,0 +1,13 @@
+[2025-02-28T09:30:29.890+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data manual__2025-02-28T09:30:20.560268+00:00 [queued]>
+[2025-02-28T09:30:29.910+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data manual__2025-02-28T09:30:20.560268+00:00 [queued]>
+[2025-02-28T09:30:29.911+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-28T09:30:29.939+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_historical_data> on 2025-02-28 09:30:20.560268+00:00
+[2025-02-28T09:30:29.956+0000] {standard_task_runner.py:57} INFO - Started process 298 to run task
+[2025-02-28T09:30:29.968+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'fetch_historical_data', 'manual__2025-02-28T09:30:20.560268+00:00', '--job-id', '3', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpi20eew6_']
+[2025-02-28T09:30:29.989+0000] {standard_task_runner.py:85} INFO - Job 3: Subtask fetch_historical_data
+[2025-02-28T09:30:30.217+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data manual__2025-02-28T09:30:20.560268+00:00 [running]> on host bfe91925d4dd
+[2025-02-28T09:30:30.429+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='fetch_historical_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-28T09:30:20.560268+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-28T09:30:20.560268+00:00'
+[2025-02-28T09:30:36.165+0000] {python.py:194} INFO - Done. Returned value was: /tmp/crypto_historical_data.csv
+[2025-02-28T09:30:36.198+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=fetch_historical_data, execution_date=20250228T093020, start_date=20250228T093029, end_date=20250228T093036
+[2025-02-28T09:30:36.258+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-28T09:30:36.291+0000] {taskinstance.py:2784} INFO - 1 downstream tasks scheduled from follow-on schedule check

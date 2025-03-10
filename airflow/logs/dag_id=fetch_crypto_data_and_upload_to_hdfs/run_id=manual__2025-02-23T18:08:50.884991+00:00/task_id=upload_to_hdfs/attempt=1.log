@@ -1,0 +1,23 @@
+[2025-02-23T18:08:59.778+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-23T18:08:50.884991+00:00 [queued]>
+[2025-02-23T18:08:59.793+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-23T18:08:50.884991+00:00 [queued]>
+[2025-02-23T18:08:59.795+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-23T18:08:59.815+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): upload_to_hdfs> on 2025-02-23 18:08:50.884991+00:00
+[2025-02-23T18:08:59.824+0000] {standard_task_runner.py:57} INFO - Started process 7388 to run task
+[2025-02-23T18:08:59.828+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'manual__2025-02-23T18:08:50.884991+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpga9s2rsm']
+[2025-02-23T18:08:59.833+0000] {standard_task_runner.py:85} INFO - Job 7: Subtask upload_to_hdfs
+[2025-02-23T18:08:59.901+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-23T18:08:50.884991+00:00 [running]> on host 95f034191b67
+[2025-02-23T18:09:00.042+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='upload_to_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-23T18:08:50.884991+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-23T18:08:50.884991+00:00'
+[2025-02-23T18:09:00.044+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-23T18:09:00.047+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker exec -it -u root namenode bash -c "hdfs dfs -put -f /tmp/crypto_historical_data.csv /user/hadoop/crypto_historical_data.csv"']
+[2025-02-23T18:09:00.066+0000] {subprocess.py:86} INFO - Output:
+[2025-02-23T18:09:00.133+0000] {subprocess.py:93} INFO - the input device is not a TTY
+[2025-02-23T18:09:00.135+0000] {subprocess.py:97} INFO - Command exited with return code 1
+[2025-02-23T18:09:00.154+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 1.
+[2025-02-23T18:09:00.159+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250223T180850, start_date=20250223T180859, end_date=20250223T180900
+[2025-02-23T18:09:00.181+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 7 for task upload_to_hdfs (Bash command failed. The command returned a non-zero exit code 1.; 7388)
+[2025-02-23T18:09:00.205+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-23T18:09:00.244+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

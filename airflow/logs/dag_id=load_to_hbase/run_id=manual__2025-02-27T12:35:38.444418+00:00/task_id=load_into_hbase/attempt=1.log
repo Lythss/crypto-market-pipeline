@@ -1,0 +1,36 @@
+[2025-02-27T12:35:43.845+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T12:35:38.444418+00:00 [queued]>
+[2025-02-27T12:35:43.860+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T12:35:38.444418+00:00 [queued]>
+[2025-02-27T12:35:43.861+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-27T12:35:43.880+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): load_into_hbase> on 2025-02-27 12:35:38.444418+00:00
+[2025-02-27T12:35:43.893+0000] {standard_task_runner.py:57} INFO - Started process 327 to run task
+[2025-02-27T12:35:43.898+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'load_to_hbase', 'load_into_hbase', 'manual__2025-02-27T12:35:38.444418+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/load_data.py', '--cfg-path', '/tmp/tmpzv8vmiee']
+[2025-02-27T12:35:43.913+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask load_into_hbase
+[2025-02-27T12:35:44.114+0000] {task_command.py:415} INFO - Running <TaskInstance: load_to_hbase.load_into_hbase manual__2025-02-27T12:35:38.444418+00:00 [running]> on host b0117377cc2b
+[2025-02-27T12:35:44.277+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='load_to_hbase' AIRFLOW_CTX_TASK_ID='load_into_hbase' AIRFLOW_CTX_EXECUTION_DATE='2025-02-27T12:35:38.444418+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-27T12:35:38.444418+00:00'
+[2025-02-27T12:35:52.185+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/opt/airflow/dags/load_data.py", line 63, in load_processed_data
+    raise AirflowException("HBase table 'crypto_prices' does not exist")
+airflow.exceptions.AirflowException: HBase table 'crypto_prices' does not exist
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/opt/airflow/dags/load_data.py", line 91, in load_processed_data
+    raise AirflowException(f"Failed to load data into HBase: {str(e)}")
+airflow.exceptions.AirflowException: Failed to load data into HBase: HBase table 'crypto_prices' does not exist
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/load_data.py", line 97, in load_processed_data
+    os.remove(local_file)
+FileNotFoundError: [Errno 2] No such file or directory: '/tmp/crypto_agg.csv'
+[2025-02-27T12:35:52.214+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=load_to_hbase, task_id=load_into_hbase, execution_date=20250227T123538, start_date=20250227T123543, end_date=20250227T123552
+[2025-02-27T12:35:52.241+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 2 for task load_into_hbase ([Errno 2] No such file or directory: '/tmp/crypto_agg.csv'; 327)
+[2025-02-27T12:35:52.266+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-27T12:35:52.294+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,186 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    volumes:
+      - postgres_db_volume:/var/lib/postgresql/data
+    networks:
+      - airflow_network
+
+  airflow-init:
+    image: apache/airflow:2.7.1
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+
+    entrypoint: bash -c "airflow db init && airflow users create --username admin --password admin --firstname Admin --lastname User --email admin@example.com --role Admin"
+    networks:
+      - airflow_network
+
+  airflow-webserver:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__API__AUTH_BACKENDS=airflow.api.auth.backend.basic_auth
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - airflow-init
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: webserver
+    networks:
+      - airflow_network
+
+  airflow-scheduler:
+    build:
+      context: ./airflow
+      dockerfile: Dockerfile
+    restart: always
+    environment:
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres:5432/airflow
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: scheduler
+    depends_on:
+      - postgres
+    networks:
+      - airflow_network
+
+
+  # Hadoop NameNode
+  hadoop-namenode:
+    build:
+      context: ./namenode
+      dockerfile: Dockerfile
+    container_name: namenode
+    environment:
+      - CLUSTER_NAME=test-cluster
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_namenode_name_dir=file:///hadoop/dfs/name
+    ports:
+      - "9870:9870"
+    volumes:
+      - ./hadoop/namenode_data:/hadoop/dfs/name
+      - ./namenode/home:/home
+      - ./namenode/apt:/etc/apt
+    networks:
+      - airflow_network
+
+  # Hadoop DataNode
+  hadoop-datanode:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop3.2.1-java8
+    container_name: datanode
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - HDFS_CONF_dfs_datanode_data_dir=file:///hadoop/dfs/data
+    ports:
+      - "9864:9864"
+    volumes:
+      - ./hadoop/datanode_data:/hadoop/dfs/data
+    networks:
+      - airflow_network
+    depends_on:
+      - hadoop-namenode
+
+
+
+  resourcemanager:
+    image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
+    container_name: resourcemanager
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    ports:
+      - "8088:8088" 
+    networks:
+      - airflow_network
+    depends_on:
+      - hadoop-namenode
+      - hadoop-datanode
+
+  # Hadoop NodeManager (YARN Slave)
+  nodemanager:
+    image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
+    container_name: nodemanager
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+    networks:
+      - airflow_network
+    depends_on:
+      - resourcemanager
+
+  # MapReduce JobHistory Server
+  jobhistory:
+    image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
+    container_name: jobhistory
+    environment:
+      - CORE_CONF_fs_defaultFS=hdfs://namenode:9000
+      - YARN_CONF_yarn_resourcemanager_address=resourcemanager:8032
+      - YARN_CONF_yarn_resourcemanager_scheduler_address=resourcemanager:8030
+      - MAPRED_CONF_mapreduce_jobhistory_address=jobhistory:10020
+      - MAPRED_CONF_mapreduce_jobhistory_webapp_address=0.0.0.0:19888
+    ports:
+      - "8188:8188" 
+    networks:
+      - airflow_network
+    depends_on:
+      - hadoop-namenode
+      - hadoop-datanode
+      - resourcemanager
+
+  # HBase Master
+  hbase-master:
+    image: harisekhon/hbase:latest
+    container_name: hbase-master
+    environment:
+      - HBASE_MANAGES_ZK=true
+    ports:
+      - "16010:16010"   # HBase Master UI
+      - "9090:9090"     # Thrift API
+      - "8085:8085"     # HBase REST API (Add this)
+    networks:
+      - airflow_network
+    depends_on:
+      - hadoop-namenode
+      - hadoop-datanode
+
+  # HBase Region Server
+  hbase-regionserver:
+    image: harisekhon/hbase:latest
+    container_name: hbase-regionserver
+    environment:
+      - HBASE_CONF_hbase_cluster_distributed=true
+    networks:
+      - airflow_network
+    depends_on:
+      - hbase-master
+
+
+
+volumes:
+  postgres_db_volume:
+networks:
+  airflow_network:
+    driver: bridge

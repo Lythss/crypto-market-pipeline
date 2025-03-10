@@ -1,0 +1,61 @@
+[2025-02-26T09:11:05.434+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T09:11:05.451+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data scheduled__2025-02-25T00:00:00+00:00 [queued]>
+[2025-02-26T09:11:05.452+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T09:11:05.470+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): fetch_historical_data> on 2025-02-25 00:00:00+00:00
+[2025-02-26T09:11:05.479+0000] {standard_task_runner.py:57} INFO - Started process 1306 to run task
+[2025-02-26T09:11:05.483+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'fetch_historical_data', 'scheduled__2025-02-25T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpekdby6tv']
+[2025-02-26T09:11:05.487+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask fetch_historical_data
+[2025-02-26T09:11:05.592+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.fetch_historical_data scheduled__2025-02-25T00:00:00+00:00 [running]> on host 76a0b27568e2
+[2025-02-26T09:11:05.737+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_crypto_data_and_upload_to_hdfs' AIRFLOW_CTX_TASK_ID='fetch_historical_data' AIRFLOW_CTX_EXECUTION_DATE='2025-02-25T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-25T00:00:00+00:00'
+[2025-02-26T09:11:05.753+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3263, in connect
+    self._state.set_connection(self._connect())
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3607, in _connect
+    self._add_conn_hooks(conn)
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3617, in _add_conn_hooks
+    self._set_pragmas(conn)
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3632, in _set_pragmas
+    cursor.execute('PRAGMA %s = %s;' % (pragma, value))
+sqlite3.OperationalError: database is locked
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 281, in fetch_historical_data
+    hist = crypto.history(period="30d")
+  File "/home/airflow/.local/lib/python3.9/site-packages/yfinance/utils.py", line 104, in wrapper
+    result = func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/yfinance/base.py", line 80, in history
+    return self._lazy_load_price_history().history(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/yfinance/base.py", line 86, in _lazy_load_price_history
+    self._price_history = PriceHistory(self._data, self.ticker, self._get_ticker_tz(self.proxy, timeout=10))
+  File "/home/airflow/.local/lib/python3.9/site-packages/yfinance/base.py", line 94, in _get_ticker_tz
+    tz = c.lookup(self.ticker)
+  File "/home/airflow/.local/lib/python3.9/site-packages/yfinance/cache.py", line 163, in lookup
+    self.initialise()
+  File "/home/airflow/.local/lib/python3.9/site-packages/yfinance/cache.py", line 146, in initialise
+    db.connect()
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3266, in connect
+    self._initialize_connection(self._state.conn)
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3088, in __exit__
+    reraise(new_type, new_type(exc_value, *exc_args), traceback)
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 196, in reraise
+    raise value.with_traceback(tb)
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3263, in connect
+    self._state.set_connection(self._connect())
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3607, in _connect
+    self._add_conn_hooks(conn)
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3617, in _add_conn_hooks
+    self._set_pragmas(conn)
+  File "/home/airflow/.local/lib/python3.9/site-packages/peewee.py", line 3632, in _set_pragmas
+    cursor.execute('PRAGMA %s = %s;' % (pragma, value))
+peewee.OperationalError: database is locked
+[2025-02-26T09:11:05.786+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=fetch_historical_data, execution_date=20250225T000000, start_date=20250226T091105, end_date=20250226T091105
+[2025-02-26T09:11:05.816+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 2 for task fetch_historical_data (database is locked; 1306)
+[2025-02-26T09:11:05.857+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-26T09:11:05.899+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

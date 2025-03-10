@@ -1,0 +1,71 @@
+[2025-02-25T11:02:28.358+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T11:02:28.374+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T11:02:28.375+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-25T11:02:28.396+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-24 00:00:00+00:00
+[2025-02-25T11:02:28.406+0000] {standard_task_runner.py:57} INFO - Started process 93425 to run task
+[2025-02-25T11:02:28.430+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'crypto_data_processing_mapreduce', 'run_mapreduce_job', 'scheduled__2025-02-24T00:00:00+00:00', '--job-id', '22', '--raw', '--subdir', 'DAGS_FOLDER/transform_data.py', '--cfg-path', '/tmp/tmpxtczon5w']
+[2025-02-25T11:02:28.441+0000] {standard_task_runner.py:85} INFO - Job 22: Subtask run_mapreduce_job
+[2025-02-25T11:02:28.646+0000] {task_command.py:415} INFO - Running <TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [running]> on host a57837beda44
+[2025-02-25T11:02:28.795+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.9/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-25T11:02:28.859+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_data_processing_mapreduce' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-24T00:00:00+00:00'
+[2025-02-25T11:02:28.863+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-25T11:02:28.868+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec namenode hadoop jar /opt/hadoop/hadoop-streaming.jar           -input /user/root/crypto/YYYY=2025/MM=02/DD=24/coingecko_raw.json           -output /user/root/crypto/processed/YYYY=2025/MM=02/DD=24           -mapper /path/to/mapper.py           -reducer /path/to/reducer.py           -file /path/to/mapper.py           -file /path/to/reducer.py\n        ']
+[2025-02-25T11:02:28.886+0000] {subprocess.py:86} INFO - Output:
+[2025-02-25T11:02:28.889+0000] {subprocess.py:93} INFO - /bin/bash: line 2: docker: command not found
+[2025-02-25T11:02:28.890+0000] {subprocess.py:97} INFO - Command exited with return code 127
+[2025-02-25T11:02:28.929+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 127.
+[2025-02-25T11:02:28.941+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=crypto_data_processing_mapreduce, task_id=run_mapreduce_job, execution_date=20250224T000000, start_date=20250225T110228, end_date=20250225T110228
+[2025-02-25T11:02:28.967+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 22 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 127.; 93425)
+[2025-02-25T11:02:28.994+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-25T11:02:29.036+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-25T15:26:36.063+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T15:26:36.079+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T15:26:36.080+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-25T15:26:36.102+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-24 00:00:00+00:00
+[2025-02-25T15:26:36.112+0000] {standard_task_runner.py:57} INFO - Started process 2617 to run task
+[2025-02-25T15:26:36.118+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'crypto_data_processing_mapreduce', 'run_mapreduce_job', 'scheduled__2025-02-24T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/transform_data.py', '--cfg-path', '/tmp/tmpqyp5ial1']
+[2025-02-25T15:26:36.123+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask run_mapreduce_job
+[2025-02-25T15:26:36.204+0000] {task_command.py:415} INFO - Running <TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [running]> on host 53d736af5afa
+[2025-02-25T15:26:36.291+0000] {logging_mixin.py:151} WARNING - /home/***/.local/lib/python3.9/site-packages/***/utils/context.py:206 AirflowContextDeprecationWarning: Accessing 'execution_date' from the template is deprecated and will be removed in a future version. Please use 'data_interval_start' or 'logical_date' instead.
+[2025-02-25T15:26:36.334+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_data_processing_mapreduce' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-24T00:00:00+00:00'
+[2025-02-25T15:26:36.336+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-25T15:26:36.339+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', '\n        docker exec namenode hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar           -input /user/root/crypto/YYYY=2025/MM=02/DD=24/coingecko_raw.json           -output /user/root/crypto/processed/YYYY=2025/MM=02/DD=24           -mapper /path/to/mapper.py           -reducer /path/to/reducer.py           -file /path/to/mapper.py           -file /path/to/reducer.py\n        ']
+[2025-02-25T15:26:36.352+0000] {subprocess.py:86} INFO - Output:
+[2025-02-25T15:26:36.355+0000] {subprocess.py:93} INFO - /bin/bash: line 2: docker: command not found
+[2025-02-25T15:26:36.356+0000] {subprocess.py:97} INFO - Command exited with return code 127
+[2025-02-25T15:26:36.373+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 127.
+[2025-02-25T15:26:36.384+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=crypto_data_processing_mapreduce, task_id=run_mapreduce_job, execution_date=20250224T000000, start_date=20250225T152636, end_date=20250225T152636
+[2025-02-25T15:26:36.405+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 2 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 127.; 2617)
+[2025-02-25T15:26:36.451+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-25T15:26:36.486+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-25T17:11:56.147+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T17:11:56.162+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [queued]>
+[2025-02-25T17:11:56.163+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-25T17:11:56.182+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-24 00:00:00+00:00
+[2025-02-25T17:11:56.190+0000] {standard_task_runner.py:57} INFO - Started process 1093 to run task
+[2025-02-25T17:11:56.194+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'crypto_data_processing_mapreduce', 'run_mapreduce_job', 'scheduled__2025-02-24T00:00:00+00:00', '--job-id', '2', '--raw', '--subdir', 'DAGS_FOLDER/transform_data.py', '--cfg-path', '/tmp/tmpgrj3d54u']
+[2025-02-25T17:11:56.198+0000] {standard_task_runner.py:85} INFO - Job 2: Subtask run_mapreduce_job
+[2025-02-25T17:11:56.277+0000] {task_command.py:415} INFO - Running <TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job scheduled__2025-02-24T00:00:00+00:00 [running]> on host bd2eedaff2f8
+[2025-02-25T17:11:56.412+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_data_processing_mapreduce' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-24T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-24T00:00:00+00:00'
+[2025-02-25T17:11:56.415+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-25T17:11:56.417+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker exec namenode ls']
+[2025-02-25T17:11:56.435+0000] {subprocess.py:86} INFO - Output:
+[2025-02-25T17:11:56.440+0000] {subprocess.py:93} INFO - /bin/bash: line 1: docker: command not found
+[2025-02-25T17:11:56.441+0000] {subprocess.py:97} INFO - Command exited with return code 127
+[2025-02-25T17:11:56.458+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/bash.py", line 210, in execute
+    raise AirflowException(
+airflow.exceptions.AirflowException: Bash command failed. The command returned a non-zero exit code 127.
+[2025-02-25T17:11:56.463+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=crypto_data_processing_mapreduce, task_id=run_mapreduce_job, execution_date=20250224T000000, start_date=20250225T171156, end_date=20250225T171156
+[2025-02-25T17:11:56.483+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 2 for task run_mapreduce_job (Bash command failed. The command returned a non-zero exit code 127.; 1093)
+[2025-02-25T17:11:56.527+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-25T17:11:56.559+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

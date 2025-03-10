@@ -1,0 +1,52 @@
+[2025-02-23T18:57:59.257+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-23T18:57:50.092826+00:00 [queued]>
+[2025-02-23T18:57:59.271+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-23T18:57:50.092826+00:00 [queued]>
+[2025-02-23T18:57:59.272+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-23T18:57:59.294+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): upload_to_hdfs> on 2025-02-23 18:57:50.092826+00:00
+[2025-02-23T18:57:59.303+0000] {standard_task_runner.py:57} INFO - Started process 62212 to run task
+[2025-02-23T18:57:59.307+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'fetch_crypto_data_and_upload_to_hdfs', 'upload_to_hdfs', 'manual__2025-02-23T18:57:50.092826+00:00', '--job-id', '32', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpczb69vbj']
+[2025-02-23T18:57:59.312+0000] {standard_task_runner.py:85} INFO - Job 32: Subtask upload_to_hdfs
+[2025-02-23T18:57:59.383+0000] {task_command.py:415} INFO - Running <TaskInstance: fetch_crypto_data_and_upload_to_hdfs.upload_to_hdfs manual__2025-02-23T18:57:50.092826+00:00 [running]> on host 95f034191b67
+[2025-02-23T18:57:59.436+0000] {abstractoperator.py:696} ERROR - Exception rendering Jinja template for task 'upload_to_hdfs', field 'bash_command'. Template: 'chmod +x /tmp/execute_command.sh && ./tmp/execute_command.sh'
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/abstractoperator.py", line 688, in _do_render_template_fields
+    rendered_content = self.render_template(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/template/templater.py", line 153, in render_template
+    template = jinja_env.get_template(value)
+  File "/home/airflow/.local/lib/python3.9/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/airflow/.local/lib/python3.9/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/airflow/.local/lib/python3.9/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/home/airflow/.local/lib/python3.9/site-packages/jinja2/loaders.py", line 218, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: chmod +x /tmp/execute_command.sh && ./tmp/execute_command.sh
+[2025-02-23T18:57:59.438+0000] {taskinstance.py:1943} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1518, in _run_raw_task
+    self._execute_task_with_callbacks(context, test_mode, session=session)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1646, in _execute_task_with_callbacks
+    task_orig = self.render_templates(context=context)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 2291, in render_templates
+    original_task.render_template_fields(context)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/baseoperator.py", line 1244, in render_template_fields
+    self._do_render_template_fields(self, self.template_fields, context, jinja_env, set())
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/session.py", line 77, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/abstractoperator.py", line 688, in _do_render_template_fields
+    rendered_content = self.render_template(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/template/templater.py", line 153, in render_template
+    template = jinja_env.get_template(value)
+  File "/home/airflow/.local/lib/python3.9/site-packages/jinja2/environment.py", line 1010, in get_template
+    return self._load_template(name, globals)
+  File "/home/airflow/.local/lib/python3.9/site-packages/jinja2/environment.py", line 969, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "/home/airflow/.local/lib/python3.9/site-packages/jinja2/loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "/home/airflow/.local/lib/python3.9/site-packages/jinja2/loaders.py", line 218, in get_source
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: chmod +x /tmp/execute_command.sh && ./tmp/execute_command.sh
+[2025-02-23T18:57:59.451+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_crypto_data_and_upload_to_hdfs, task_id=upload_to_hdfs, execution_date=20250223T185750, start_date=20250223T185759, end_date=20250223T185759
+[2025-02-23T18:57:59.469+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 32 for task upload_to_hdfs (chmod +x /tmp/execute_command.sh && ./tmp/execute_command.sh; 62212)
+[2025-02-23T18:57:59.484+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-23T18:57:59.513+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

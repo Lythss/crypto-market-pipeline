@@ -1,0 +1,4 @@
+requests
+pandas
+hdfs
+yfinance

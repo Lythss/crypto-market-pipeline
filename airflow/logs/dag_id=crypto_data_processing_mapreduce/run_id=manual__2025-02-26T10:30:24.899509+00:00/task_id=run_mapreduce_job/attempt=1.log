@@ -1,0 +1,40 @@
+[2025-02-26T10:30:27.870+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-26T10:30:24.899509+00:00 [queued]>
+[2025-02-26T10:30:27.885+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-26T10:30:24.899509+00:00 [queued]>
+[2025-02-26T10:30:27.886+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-02-26T10:30:27.911+0000] {taskinstance.py:1382} INFO - Executing <Task(BashOperator): run_mapreduce_job> on 2025-02-26 10:30:24.899509+00:00
+[2025-02-26T10:30:27.918+0000] {standard_task_runner.py:57} INFO - Started process 25745 to run task
+[2025-02-26T10:30:27.922+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'crypto_data_processing_mapreduce', 'run_mapreduce_job', 'manual__2025-02-26T10:30:24.899509+00:00', '--job-id', '10', '--raw', '--subdir', 'DAGS_FOLDER/transform_data.py', '--cfg-path', '/tmp/tmpf5fiw4ln']
+[2025-02-26T10:30:27.927+0000] {standard_task_runner.py:85} INFO - Job 10: Subtask run_mapreduce_job
+[2025-02-26T10:30:28.001+0000] {task_command.py:415} INFO - Running <TaskInstance: crypto_data_processing_mapreduce.run_mapreduce_job manual__2025-02-26T10:30:24.899509+00:00 [running]> on host c0f81276e31d
+[2025-02-26T10:30:28.112+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='crypto_data_processing_mapreduce' AIRFLOW_CTX_TASK_ID='run_mapreduce_job' AIRFLOW_CTX_EXECUTION_DATE='2025-02-26T10:30:24.899509+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-02-26T10:30:24.899509+00:00'
+[2025-02-26T10:30:28.114+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2025-02-26T10:30:28.117+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'docker exec namenode ls']
+[2025-02-26T10:30:28.131+0000] {subprocess.py:86} INFO - Output:
+[2025-02-26T10:30:28.422+0000] {subprocess.py:93} INFO - KEYS
+[2025-02-26T10:30:28.423+0000] {subprocess.py:93} INFO - bin
+[2025-02-26T10:30:28.429+0000] {subprocess.py:93} INFO - boot
+[2025-02-26T10:30:28.431+0000] {subprocess.py:93} INFO - dev
+[2025-02-26T10:30:28.432+0000] {subprocess.py:93} INFO - entrypoint.sh
+[2025-02-26T10:30:28.435+0000] {subprocess.py:93} INFO - etc
+[2025-02-26T10:30:28.436+0000] {subprocess.py:93} INFO - hadoop
+[2025-02-26T10:30:28.436+0000] {subprocess.py:93} INFO - hadoop-data
+[2025-02-26T10:30:28.437+0000] {subprocess.py:93} INFO - home
+[2025-02-26T10:30:28.438+0000] {subprocess.py:93} INFO - lib
+[2025-02-26T10:30:28.439+0000] {subprocess.py:93} INFO - lib64
+[2025-02-26T10:30:28.440+0000] {subprocess.py:93} INFO - media
+[2025-02-26T10:30:28.441+0000] {subprocess.py:93} INFO - mnt
+[2025-02-26T10:30:28.443+0000] {subprocess.py:93} INFO - opt
+[2025-02-26T10:30:28.445+0000] {subprocess.py:93} INFO - proc
+[2025-02-26T10:30:28.446+0000] {subprocess.py:93} INFO - root
+[2025-02-26T10:30:28.446+0000] {subprocess.py:93} INFO - run
+[2025-02-26T10:30:28.447+0000] {subprocess.py:93} INFO - run.sh
+[2025-02-26T10:30:28.447+0000] {subprocess.py:93} INFO - sbin
+[2025-02-26T10:30:28.448+0000] {subprocess.py:93} INFO - srv
+[2025-02-26T10:30:28.449+0000] {subprocess.py:93} INFO - sys
+[2025-02-26T10:30:28.449+0000] {subprocess.py:93} INFO - tmp
+[2025-02-26T10:30:28.450+0000] {subprocess.py:93} INFO - usr
+[2025-02-26T10:30:28.451+0000] {subprocess.py:93} INFO - var
+[2025-02-26T10:30:28.452+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2025-02-26T10:30:28.496+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=crypto_data_processing_mapreduce, task_id=run_mapreduce_job, execution_date=20250226T103024, start_date=20250226T103027, end_date=20250226T103028
+[2025-02-26T10:30:28.538+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-02-26T10:30:28.570+0000] {taskinstance.py:2784} INFO - 0 downstream tasks scheduled from follow-on schedule check

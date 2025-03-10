@@ -1,0 +1,56 @@
+[2025-02-22T19:27:46.605+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-13T00:00:00+00:00 [queued]>
+[2025-02-22T19:27:46.620+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-13T00:00:00+00:00 [queued]>
+[2025-02-22T19:27:46.621+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2025-02-22T19:27:46.647+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-02-13 00:00:00+00:00
+[2025-02-22T19:27:46.656+0000] {standard_task_runner.py:57} INFO - Started process 1429 to run task
+[2025-02-22T19:27:46.660+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-02-13T00:00:00+00:00', '--job-id', '153', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmphbr8eql3']
+[2025-02-22T19:27:46.665+0000] {standard_task_runner.py:85} INFO - Job 153: Subtask store_raw_data_in_hdfs
+[2025-02-22T19:27:46.748+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-13T00:00:00+00:00 [running]> on host 972836975d47
+[2025-02-22T19:27:46.886+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-13T00:00:00+00:00'
+[2025-02-22T19:27:46.921+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 48, in store_raw_data_in_hdfs
+    subprocess.run(["hdfs", "dfs", "-mkdir", "-p", hdfs_dir])
+  File "/usr/local/lib/python3.8/subprocess.py", line 493, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/local/lib/python3.8/subprocess.py", line 858, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/local/lib/python3.8/subprocess.py", line 1720, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+PermissionError: [Errno 13] Permission denied: 'hdfs'
+[2025-02-22T19:27:46.940+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250213T000000, start_date=20250222T192746, end_date=20250222T192746
+[2025-02-22T19:27:46.968+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 153 for task store_raw_data_in_hdfs ([Errno 13] Permission denied: 'hdfs'; 1429)
+[2025-02-22T19:27:46.997+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-22T19:27:47.207+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-02-23T13:37:38.282+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-13T00:00:00+00:00 [queued]>
+[2025-02-23T13:37:38.340+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-13T00:00:00+00:00 [queued]>
+[2025-02-23T13:37:38.342+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 2
+[2025-02-23T13:37:38.515+0000] {taskinstance.py:1380} INFO - Executing <Task(PythonOperator): store_raw_data_in_hdfs> on 2025-02-13 00:00:00+00:00
+[2025-02-23T13:37:38.548+0000] {standard_task_runner.py:57} INFO - Started process 1523 to run task
+[2025-02-23T13:37:38.572+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'coingecko_ingestion_dag', 'store_raw_data_in_hdfs', 'scheduled__2025-02-13T00:00:00+00:00', '--job-id', '105', '--raw', '--subdir', 'DAGS_FOLDER/ingest_data.py', '--cfg-path', '/tmp/tmpi09eibky']
+[2025-02-23T13:37:38.586+0000] {standard_task_runner.py:85} INFO - Job 105: Subtask store_raw_data_in_hdfs
+[2025-02-23T13:37:39.077+0000] {task_command.py:415} INFO - Running <TaskInstance: coingecko_ingestion_dag.store_raw_data_in_hdfs scheduled__2025-02-13T00:00:00+00:00 [running]> on host 49036eb7676e
+[2025-02-23T13:37:39.514+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='etudiant' AIRFLOW_CTX_DAG_ID='coingecko_ingestion_dag' AIRFLOW_CTX_TASK_ID='store_raw_data_in_hdfs' AIRFLOW_CTX_EXECUTION_DATE='2025-02-13T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-02-13T00:00:00+00:00'
+[2025-02-23T13:37:39.747+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/ingest_data.py", line 48, in store_raw_data_in_hdfs
+    subprocess.run(["hdfs", "dfs", "-mkdir", "-p", hdfs_dir])
+  File "/usr/local/lib/python3.8/subprocess.py", line 493, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/local/lib/python3.8/subprocess.py", line 858, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/local/lib/python3.8/subprocess.py", line 1720, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+PermissionError: [Errno 13] Permission denied: 'hdfs'
+[2025-02-23T13:37:39.813+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=coingecko_ingestion_dag, task_id=store_raw_data_in_hdfs, execution_date=20250213T000000, start_date=20250223T133738, end_date=20250223T133739
+[2025-02-23T13:37:39.922+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 105 for task store_raw_data_in_hdfs ([Errno 13] Permission denied: 'hdfs'; 1523)
+[2025-02-23T13:37:39.992+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-02-23T13:37:40.057+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check
